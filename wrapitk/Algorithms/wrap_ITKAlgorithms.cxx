@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_ITKAlgorithms.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/03 23:50:14 $
-  Version:   $Revision: 1.1 $
+  Date:      $Date: 2004/12/04 00:39:54 $
+  Version:   $Revision: 1.2 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -25,26 +25,26 @@ namespace _cable_
     ITK_WRAP_GROUP(itkCurvatureFlowImageFilter),
     ITK_WRAP_GROUP(itkDemonsRegistrationFilter),
     ITK_WRAP_GROUP(itkHistogramMatchingImageFilter),
-    ITK_WRAP_GROUP(itkImageRegistrationMethod),
-    ITK_WRAP_GROUP(itkImageToImageMetric),
-    ITK_WRAP_GROUP(itkMeanSquaresImageToImageMetric),
-    ITK_WRAP_GROUP(itkMutualInformationImageToImageMetric),
-    ITK_WRAP_GROUP(itkMultiResolutionImageRegistrationMethod),
-    ITK_WRAP_GROUP(itkNormalizedCorrelationImageToImageMetric),
+//    ITK_WRAP_GROUP(itkImageRegistrationMethod),
+//    ITK_WRAP_GROUP(itkImageToImageMetric),
+//    ITK_WRAP_GROUP(itkMeanSquaresImageToImageMetric),
+//    ITK_WRAP_GROUP(itkMutualInformationImageToImageMetric),
+//    ITK_WRAP_GROUP(itkMultiResolutionImageRegistrationMethod),
+//    ITK_WRAP_GROUP(itkNormalizedCorrelationImageToImageMetric),
     ITK_WRAP_GROUP(itkOtsuThresholdImageCalculator),
-    ITK_WRAP_GROUP(itkMeanReciprocalSquareDifferenceImageToImageMetric),
-    ITK_WRAP_GROUP(itkThresholdSegmentationLevelSetImageFilter),
+//    ITK_WRAP_GROUP(itkMeanReciprocalSquareDifferenceImageToImageMetric),
+//    ITK_WRAP_GROUP(itkThresholdSegmentationLevelSetImageFilter),
     ITK_WRAP_GROUP(itkGeodesicActiveContourLevelSetImageFilter),
-    ITK_WRAP_GROUP(itkShapeDetectionLevelSetImageFilter),
+//    ITK_WRAP_GROUP(itkShapeDetectionLevelSetImageFilter),
     ITK_WRAP_GROUP(itkTPGACLevelSetImageFilter),
     ITK_WRAP_GROUP(itkGVFGACLevelSetImageFilter),
     ITK_WRAP_GROUP(itkCurvesLevelSetImageFilter),
     ITK_WRAP_GROUP(itkNarrowBandLevelSetImageFilter),     
     ITK_WRAP_GROUP(itkNarrowBandCurvesLevelSetImageFilter),
-    ITK_WRAP_GROUP(itkMattesMutualInformationImageToImageMetric),
+//    ITK_WRAP_GROUP(itkMattesMutualInformationImageToImageMetric),
     ITK_WRAP_GROUP(itkPDEDeformableRegistrationFilter),
-    ITK_WRAP_GROUP(itkRecursiveMultiResolutionPyramidImageFilter),
-    ITK_WRAP_GROUP(itkVoronoiSegmentationImageFilter),
+//    ITK_WRAP_GROUP(itkRecursiveMultiResolutionPyramidImageFilter),
+//    ITK_WRAP_GROUP(itkVoronoiSegmentationImageFilter),
     ITK_WRAP_GROUP(itkWatershedImageFilter)
   };
 }

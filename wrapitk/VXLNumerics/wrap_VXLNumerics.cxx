@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_VXLNumerics.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/03 23:50:14 $
-  Version:   $Revision: 1.1 $
+  Date:      $Date: 2004/12/04 00:40:02 $
+  Version:   $Revision: 1.2 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -21,17 +21,17 @@ namespace _cable_
   const char* const package = ITK_WRAP_PACKAGE_NAME(ITK_WRAP_PACKAGE);
   const char* const groups[] =
   {
-    ITK_WRAP_GROUP(vnl_matrix),
+//    ITK_WRAP_GROUP(vnl_matrix),
     ITK_WRAP_GROUP(vnl_vector),
-    ITK_WRAP_GROUP(vnl_c_vector),
-    ITK_WRAP_GROUP(vnl_diag_matrix),
-    ITK_WRAP_GROUP(vnl_file_matrix),
-    ITK_WRAP_GROUP(vnl_file_vector),
-    ITK_WRAP_GROUP(vnl_fortran_copy),
-    ITK_WRAP_GROUP(vnl_matrix_fixed),
-    ITK_WRAP_GROUP(vnl_matrix_fixed_ref),
-    ITK_WRAP_GROUP(vnl_matrix_ref),
-    ITK_WRAP_GROUP(vnl_vector_ref)
+//    ITK_WRAP_GROUP(vnl_c_vector),
+//    ITK_WRAP_GROUP(vnl_diag_matrix),
+//    ITK_WRAP_GROUP(vnl_file_matrix),
+//    ITK_WRAP_GROUP(vnl_file_vector),
+//    ITK_WRAP_GROUP(vnl_fortran_copy),
+//    ITK_WRAP_GROUP(vnl_matrix_fixed),
+//    ITK_WRAP_GROUP(vnl_matrix_fixed_ref),
+//    ITK_WRAP_GROUP(vnl_matrix_ref),
+//    ITK_WRAP_GROUP(vnl_vector_ref)
   };
 }
 #endif

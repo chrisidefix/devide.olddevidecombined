@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_itkGradientRecursiveGaussianImageFilter.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/03 23:50:14 $
-  Version:   $Revision: 1.1 $
+  Date:      $Date: 2004/12/04 00:39:58 $
+  Version:   $Revision: 1.2 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -30,10 +30,6 @@ namespace _cable_
                      itkGradientRecursiveGaussianImageFilterF2);
     ITK_WRAP_OBJECT1(GradientRecursiveGaussianImageFilter, image::F3,
                      itkGradientRecursiveGaussianImageFilterF3);
-    ITK_WRAP_OBJECT1(GradientRecursiveGaussianImageFilter, image::US2,
-                     itkGradientRecursiveGaussianImageFilterUS2);
-    ITK_WRAP_OBJECT1(GradientRecursiveGaussianImageFilter, image::US3,
-                     itkGradientRecursiveGaussianImageFilterUS3);
   }
 }
 

@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_itkNarrowBandLevelSetImageFilter.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/03 23:50:14 $
-  Version:   $Revision: 1.1 $
+  Date:      $Date: 2004/12/04 00:39:54 $
+  Version:   $Revision: 1.2 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -26,8 +26,6 @@ namespace _cable_
   const char* const group = ITK_WRAP_GROUP(itkNarrowBandLevelSetImageFilter);
   namespace wrappers
   {
-    ITK_WRAP_OBJECT2(NarrowBandLevelSetImageFilter, image::F2, image::F2,
-                     itkNarrowBandLevelSetImageFilterF2F2);
     ITK_WRAP_OBJECT2(NarrowBandLevelSetImageFilter, image::F3, image::F3,
                      itkNarrowBandLevelSetImageFilterF3F3);
   }

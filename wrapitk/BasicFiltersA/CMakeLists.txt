@@ -1,31 +1,31 @@
 # create the ITKBasicFiltersTcl libraries
 SET(WRAP_SOURCES
   wrap_itkAnisotropicDiffusionImageFilter
-  wrap_itkBinaryThresholdImageFilter
-  wrap_itkBinaryDilateImageFilter
-  wrap_itkBinaryErodeImageFilter
+#  wrap_itkBinaryThresholdImageFilter
+#  wrap_itkBinaryDilateImageFilter
+#  wrap_itkBinaryErodeImageFilter
   wrap_itkCannyEdgeDetectionImageFilter
   wrap_itkCastImageFilter_2D
   wrap_itkCastImageFilter_3D
   wrap_itkConfidenceConnectedImageFilter
-  wrap_itkChangeInformationImageFilter
-  wrap_itkConnectedThresholdImageFilter
+#  wrap_itkChangeInformationImageFilter
+#  wrap_itkConnectedThresholdImageFilter
   wrap_itkCurvatureAnisotropicDiffusionImageFilter
-  wrap_itkExtractImageFilter
+#  wrap_itkExtractImageFilter
   wrap_itkFastMarchingImageFilter
-  wrap_itkFlipImageFilter
+#  wrap_itkFlipImageFilter
   wrap_itkGradientAnisotropicDiffusionImageFilter
   wrap_itkGradientMagnitudeImageFilter
-  wrap_itkGrayscaleDilateImageFilter
-  wrap_itkGrayscaleErodeImageFilter
+#  wrap_itkGrayscaleDilateImageFilter
+#  wrap_itkGrayscaleErodeImageFilter
   wrap_itkDanielssonDistanceMapImageFilter
-  wrap_itkIsolatedConnectedImageFilter
+#  wrap_itkIsolatedConnectedImageFilter
   wrap_itkImportImageFilter
   wrap_itkLaplacianImageFilter
-  wrap_itkMinimumMaximumImageCalculator
+#  wrap_itkMinimumMaximumImageCalculator
   wrap_itkNeighborhoodConnectedImageFilter
-  wrap_itkSobelEdgeDetectionImageFilter
-  wrap_itkTernaryMagnitudeImageFilter
+#  wrap_itkSobelEdgeDetectionImageFilter
+#  wrap_itkTernaryMagnitudeImageFilter
 )
 
 SET(MASTER_INDEX_FILES "${WrapITK_BINARY_DIR}/VXLNumerics/VXLNumerics.mdx"

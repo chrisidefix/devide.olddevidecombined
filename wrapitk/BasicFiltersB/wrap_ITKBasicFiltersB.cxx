@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_ITKBasicFiltersB.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/03 23:50:14 $
-  Version:   $Revision: 1.1 $
+  Date:      $Date: 2004/12/04 00:39:58 $
+  Version:   $Revision: 1.2 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -21,26 +21,26 @@ namespace _cable_
   const char* const package = ITK_WRAP_PACKAGE_NAME(ITK_WRAP_PACKAGE);
   const char* const groups[] =
   {
-    ITK_WRAP_GROUP(itkExpImageFilter),
-    ITK_WRAP_GROUP(itkExpNegativeImageFilter),
+//    ITK_WRAP_GROUP(itkExpImageFilter),
+//    ITK_WRAP_GROUP(itkExpNegativeImageFilter),
     ITK_WRAP_GROUP(itkGradientMagnitudeRecursiveGaussianImageFilter),
     ITK_WRAP_GROUP(itkGradientRecursiveGaussianImageFilter),
-    ITK_WRAP_GROUP(itkMeanImageFilter),
-    ITK_WRAP_GROUP(itkMedianImageFilter),
-    ITK_WRAP_GROUP(itkNaryAddImageFilter),
+//    ITK_WRAP_GROUP(itkMeanImageFilter),
+//    ITK_WRAP_GROUP(itkMedianImageFilter),
+//    ITK_WRAP_GROUP(itkNaryAddImageFilter),
     ITK_WRAP_GROUP(itkNormalizeImageFilter),
-    ITK_WRAP_GROUP(itkPermuteAxesImageFilter),
-    ITK_WRAP_GROUP(itkRandomImageSource),
+//    ITK_WRAP_GROUP(itkPermuteAxesImageFilter),
+//    ITK_WRAP_GROUP(itkRandomImageSource),
     ITK_WRAP_GROUP(itkRecursiveGaussianImageFilter),
     ITK_WRAP_GROUP(itkRecursiveSeparableImageFilter),
-    ITK_WRAP_GROUP(itkRegionOfInterestImageFilter),
-    ITK_WRAP_GROUP(itkResampleImageFilter),
+//    ITK_WRAP_GROUP(itkRegionOfInterestImageFilter),
+//    ITK_WRAP_GROUP(itkResampleImageFilter),
     ITK_WRAP_GROUP(itkRescaleIntensityImageFilter),
     ITK_WRAP_GROUP(itkShiftScaleImageFilter),
     ITK_WRAP_GROUP(itkSigmoidImageFilter),
     ITK_WRAP_GROUP(itkSmoothingRecursiveGaussianImageFilter),
-    ITK_WRAP_GROUP(itkStatisticsImageFilter),
-    ITK_WRAP_GROUP(itkThresholdImageFilter),
+//    ITK_WRAP_GROUP(itkStatisticsImageFilter),
+//    ITK_WRAP_GROUP(itkThresholdImageFilter),
     ITK_WRAP_GROUP(itkVTKImageExport),
     ITK_WRAP_GROUP(itkVTKImageImport)
   };

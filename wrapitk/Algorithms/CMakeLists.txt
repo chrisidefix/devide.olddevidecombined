@@ -3,27 +3,27 @@ SET(WRAP_SOURCES
     wrap_itkCurvatureFlowImageFilter
     wrap_itkDemonsRegistrationFilter
     wrap_itkHistogramMatchingImageFilter
-    wrap_itkImageRegistrationMethod
-    wrap_itkImageToImageMetric
-    wrap_itkMattesMutualInformationImageToImageMetric
-    wrap_itkMeanSquaresImageToImageMetric
-    wrap_itkMinMaxCurvatureFlowImageFilter
-    wrap_itkMutualInformationImageToImageMetric
-    wrap_itkMultiResolutionImageRegistrationMethod
-    wrap_itkNormalizedCorrelationImageToImageMetric
+#    wrap_itkImageRegistrationMethod
+#    wrap_itkImageToImageMetric
+#    wrap_itkMattesMutualInformationImageToImageMetric
+#    wrap_itkMeanSquaresImageToImageMetric
+#    wrap_itkMinMaxCurvatureFlowImageFilter
+#    wrap_itkMutualInformationImageToImageMetric
+#    wrap_itkMultiResolutionImageRegistrationMethod
+#    wrap_itkNormalizedCorrelationImageToImageMetric
     wrap_itkOtsuThresholdImageCalculator
-    wrap_itkMeanReciprocalSquareDifferenceImageToImageMetric
-    wrap_itkRecursiveMultiResolutionPyramidImageFilter
-    wrap_itkThresholdSegmentationLevelSetImageFilter
+#    wrap_itkMeanReciprocalSquareDifferenceImageToImageMetric
+#    wrap_itkRecursiveMultiResolutionPyramidImageFilter
+#    wrap_itkThresholdSegmentationLevelSetImageFilter
     wrap_itkGeodesicActiveContourLevelSetImageFilter
-    wrap_itkShapeDetectionLevelSetImageFilter
+#    wrap_itkShapeDetectionLevelSetImageFilter
     wrap_itkTPGACLevelSetImageFilter
     wrap_itkGVFGACLevelSetImageFilter
     wrap_itkCurvesLevelSetImageFilter
     wrap_itkNarrowBandLevelSetImageFilter
     wrap_itkPDEDeformableRegistrationFilter
     wrap_itkNarrowBandCurvesLevelSetImageFilter
-    wrap_itkVoronoiSegmentationImageFilter
+#    wrap_itkVoronoiSegmentationImageFilter
     wrap_itkWatershedImageFilter
 )
 

@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_ITKBasicFiltersA.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/03 23:50:14 $
-  Version:   $Revision: 1.1 $
+  Date:      $Date: 2004/12/04 00:39:56 $
+  Version:   $Revision: 1.2 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -22,31 +22,31 @@ namespace _cable_
   const char* const groups[] =
   {
     ITK_WRAP_GROUP(itkAnisotropicDiffusionImageFilter),
-    ITK_WRAP_GROUP(itkBinaryThresholdImageFilter),
-    ITK_WRAP_GROUP(itkBinaryDilateImageFilter),
-    ITK_WRAP_GROUP(itkBinaryErodeImageFilter),
+//    ITK_WRAP_GROUP(itkBinaryThresholdImageFilter),
+//    ITK_WRAP_GROUP(itkBinaryDilateImageFilter),
+//    ITK_WRAP_GROUP(itkBinaryErodeImageFilter),
     ITK_WRAP_GROUP(itkCannyEdgeDetectionImageFilter),
     ITK_WRAP_GROUP(itkCastImageFilter_2D),
     ITK_WRAP_GROUP(itkCastImageFilter_3D),
-    ITK_WRAP_GROUP(itkChangeInformationImageFilter),
+//    ITK_WRAP_GROUP(itkChangeInformationImageFilter),
     ITK_WRAP_GROUP(itkConfidenceConnectedImageFilter),
-    ITK_WRAP_GROUP(itkConnectedThresholdImageFilter),
+//    ITK_WRAP_GROUP(itkConnectedThresholdImageFilter),
     ITK_WRAP_GROUP(itkCurvatureAnisotropicDiffusionImageFilter),
     ITK_WRAP_GROUP(itkDanielssonDistanceMapImageFilter),
-    ITK_WRAP_GROUP(itkExtractImageFilter),
+//    ITK_WRAP_GROUP(itkExtractImageFilter),
     ITK_WRAP_GROUP(itkFastMarchingImageFilter),
-    ITK_WRAP_GROUP(itkFlipImageFilter),
+//    ITK_WRAP_GROUP(itkFlipImageFilter),
     ITK_WRAP_GROUP(itkGradientAnisotropicDiffusionImageFilter),
     ITK_WRAP_GROUP(itkGradientMagnitudeImageFilter),
-    ITK_WRAP_GROUP(itkGrayscaleDilateImageFilter),
-    ITK_WRAP_GROUP(itkGrayscaleErodeImageFilter),
-    ITK_WRAP_GROUP(itkIsolatedConnectedImageFilter),
+//    ITK_WRAP_GROUP(itkGrayscaleDilateImageFilter),
+//    ITK_WRAP_GROUP(itkGrayscaleErodeImageFilter),
+//    ITK_WRAP_GROUP(itkIsolatedConnectedImageFilter),
     ITK_WRAP_GROUP(itkImportImageFilter),
-    ITK_WRAP_GROUP(itkLaplacianImageFilter),
-    ITK_WRAP_GROUP(itkMinimumMaximumImageCalculator),
+//    ITK_WRAP_GROUP(itkLaplacianImageFilter),
+//    ITK_WRAP_GROUP(itkMinimumMaximumImageCalculator),
     ITK_WRAP_GROUP(itkNeighborhoodConnectedImageFilter),
-    ITK_WRAP_GROUP(itkSobelEdgeDetectionImageFilter),
-    ITK_WRAP_GROUP(itkTernaryMagnitudeImageFilter)
+//    ITK_WRAP_GROUP(itkSobelEdgeDetectionImageFilter),
+//    ITK_WRAP_GROUP(itkTernaryMagnitudeImageFilter)
   };
 }
 #endif
