@@ -34,6 +34,7 @@ IF (VTKITKDV_CAN_BUILD)
 
   SUBDIRS (
     Common
+    BasicFilters
     Algorithms
   )
 

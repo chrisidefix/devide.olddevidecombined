@@ -41,7 +41,7 @@
 class VTK_EXPORT vtkITKDVImageToImageFilter : public vtkImageToImageFilter
 {
 public:
-  static vtkITKDVImageToImageFilter *New();
+  static vtkITKDVImageToImageFilter* New() { return 0; };  
   vtkTypeMacro(vtkITKDVImageToImageFilter,vtkImageToImageFilter);
 
   // Description:
@@ -300,8 +300,6 @@ private:
   vtkITKDVImageToImageFilter(const vtkITKDVImageToImageFilter&);  // Not implemented.
   void operator=(const vtkITKDVImageToImageFilter&);  // Not implemented.
 };
-
-vtkStandardNewMacro(vtkITKDVImageToImageFilter);
 
 #endif
 

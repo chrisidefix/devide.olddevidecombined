@@ -5,10 +5,12 @@
 #
 
 SET (Common_SRCS 
-     vtkITKDVImageToImageFilter.cxx)
+     vtkITKDVImageToImageFilter.cxx
+     vtkITKDVImageToImageFilterFF.cxx)
      
 SET_SOURCE_FILES_PROPERTIES(
 vtkITKDVImageToImageFilter
+vtkITKDVImageToImageFilterFF
 ABSTRACT
 )
 
