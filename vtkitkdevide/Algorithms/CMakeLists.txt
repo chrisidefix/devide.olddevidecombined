@@ -52,6 +52,7 @@ ENDIF (VTK_WRAP_PYTHON AND VTKITKDV_WRAP_PYTHON)
 
 TARGET_LINK_LIBRARIES (
   vtkitkdvAlgorithms
+  vtkitkdvCommonPython
   vtkFiltering
   vtkImaging
   vtkCommon

@@ -3,8 +3,8 @@
   Program:   Visualization Toolkit
   Module:    $RCSfile: vtkITKPDEDeformableRegistrationFilter.h,v $
   Language:  C++
-  Date:      $Date: 2004/10/21 15:42:42 $
-  Version:   $Revision: 1.1 $
+  Date:      $Date: 2004/10/21 16:13:00 $
+  Version:   $Revision: 1.2 $
 */
 // .NAME vtkITKPDEDeformableRegistrationFilter - Wrapper class around itk::PDEDeformableRegistrationImageFilter
 // .SECTION Description
@@ -15,7 +15,7 @@
 #define __vtkITKPDEDeformableRegistrationFilter_h
 
 
-#include "vtkITKImageToImageFilter.h"
+#include "vtkITKDVImageToImageFilter.h"
 #include "itkPDEDeformableRegistrationFilter.h"
 #include "itkDemonsRegistrationFilter.h"
 #include "vtkObjectFactory.h"
@@ -24,11 +24,11 @@
 #include "itkVector.h"
 #include "vtkITKUtility.h"
 
-class VTK_EXPORT vtkITKPDEDeformableRegistrationFilter : public vtkITKImageToImageFilter
+class VTK_EXPORT vtkITKPDEDeformableRegistrationFilter : public vtkITKDVImageToImageFilter
 {
  public:
   static vtkITKPDEDeformableRegistrationFilter *New();
-  vtkTypeRevisionMacro(vtkITKPDEDeformableRegistrationFilter, vtkITKImageToImageFilter);
+  vtkTypeRevisionMacro(vtkITKPDEDeformableRegistrationFilter, vtkITKDVImageToImageFilter);
   
   void PrintSelf(ostream& os, vtkIndent indent)
   {
@@ -175,7 +175,7 @@ private:
   
 };
 
-vtkCxxRevisionMacro(vtkITKPDEDeformableRegistrationFilter, "$Revision: 1.1 $");
+vtkCxxRevisionMacro(vtkITKPDEDeformableRegistrationFilter, "$Revision: 1.2 $");
 vtkStandardNewMacro(vtkITKPDEDeformableRegistrationFilter);
 
 #endif

@@ -1,9 +1,9 @@
-// .NAME vtkITKImageToImageFilter - Abstract base class for connecting ITK and VTK
+// .NAME vtkITKDVImageToImageFilter - Abstract base class for connecting ITK and VTK
 // .SECTION Description
-// vtkITKImageToImageFilter provides a foo
+// vtkITKDVImageToImageFilter provides a foo
 
-#ifndef __vtkITKImageToImageFilter_h
-#define __vtkITKImageToImageFilter_h
+#ifndef __vtkITKDVImageToImageFilter_h
+#define __vtkITKDVImageToImageFilter_h
 
 #include "itkCommand.h"
 #include "vtkSystemIncludes.h"
@@ -14,6 +14,7 @@
 #include "vtkImageToImageFilter.h"
 #include "vtkImageCast.h"
 #include "vtkImageData.h"
+#include "vtkObjectFactory.h"
 
 #ifndef vtkFloatingPointType
 #define vtkFloatingPointType float
@@ -37,10 +38,11 @@
   std::cerr << message.str() << std::endl; \
   }
 
-class VTK_EXPORT vtkITKImageToImageFilter : public vtkImageToImageFilter
+class VTK_EXPORT vtkITKDVImageToImageFilter : public vtkImageToImageFilter
 {
 public:
-  vtkTypeMacro(vtkITKImageToImageFilter,vtkImageToImageFilter);
+  static vtkITKDVImageToImageFilter *New();
+  vtkTypeMacro(vtkITKDVImageToImageFilter,vtkImageToImageFilter);
 
   // Description:
   // vtkITK filters typically cast their input to pixel type
@@ -240,7 +242,7 @@ public:
   }
   // ETX
 
-  vtkITKImageToImageFilter()
+  vtkITKDVImageToImageFilter()
   {
     // Need an import, export, and a ITK pipeline
     this->vtkCast = vtkImageCast::New();
@@ -249,17 +251,17 @@ public:
     this->vtkExporter->SetInput ( this->vtkCast->GetOutput() );
     this->m_Process = NULL;
     this->m_ProgressCommand = MemberCommand::New();
-    this->m_ProgressCommand->SetCallbackFunction ( this, &vtkITKImageToImageFilter::HandleProgressEvent );
+    this->m_ProgressCommand->SetCallbackFunction ( this, &vtkITKDVImageToImageFilter::HandleProgressEvent );
     this->m_StartEventCommand = MemberCommand::New();
-    this->m_StartEventCommand->SetCallbackFunction ( this, &vtkITKImageToImageFilter::HandleStartEvent );
+    this->m_StartEventCommand->SetCallbackFunction ( this, &vtkITKDVImageToImageFilter::HandleStartEvent );
     this->m_EndEventCommand = MemberCommand::New();
-    this->m_EndEventCommand->SetCallbackFunction ( this, &vtkITKImageToImageFilter::HandleEndEvent );
+    this->m_EndEventCommand->SetCallbackFunction ( this, &vtkITKDVImageToImageFilter::HandleEndEvent );
     // default is to cast the input pixel type
     this->CastInput = 1;
   };
-  ~vtkITKImageToImageFilter()
+  ~vtkITKDVImageToImageFilter()
   {
-    std::cerr << "Destructing vtkITKImageToImageFilter" << std::endl;
+    std::cerr << "Destructing vtkITKDVImageToImageFilter" << std::endl;
     this->vtkExporter->Delete();
     this->vtkImporter->Delete();
     this->vtkCast->Delete();
@@ -277,7 +279,7 @@ public:
       }
   };
 
-  typedef itk::SimpleMemberCommand<vtkITKImageToImageFilter> MemberCommand;
+  typedef itk::SimpleMemberCommand<vtkITKDVImageToImageFilter> MemberCommand;
   typedef MemberCommand::Pointer MemberCommandPointer;
 
   itk::ProcessObject::Pointer m_Process;
@@ -295,9 +297,11 @@ public:
   int CastInput;
   
 private:
-  vtkITKImageToImageFilter(const vtkITKImageToImageFilter&);  // Not implemented.
-  void operator=(const vtkITKImageToImageFilter&);  // Not implemented.
+  vtkITKDVImageToImageFilter(const vtkITKDVImageToImageFilter&);  // Not implemented.
+  void operator=(const vtkITKDVImageToImageFilter&);  // Not implemented.
 };
+
+vtkStandardNewMacro(vtkITKDVImageToImageFilter);
 
 #endif
 
