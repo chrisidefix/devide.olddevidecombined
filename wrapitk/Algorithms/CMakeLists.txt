@@ -17,7 +17,7 @@ SET(WRAP_SOURCES
 #    wrap_itkRecursiveMultiResolutionPyramidImageFilter
 #    wrap_itkThresholdSegmentationLevelSetImageFilter
     wrap_itkGeodesicActiveContourLevelSetImageFilter
-#    wrap_itkShapeDetectionLevelSetImageFilter
+    wrap_itkShapeDetectionLevelSetImageFilter
     wrap_itkTPGACLevelSetImageFilter
 #    wrap_itkGVFGACLevelSetImageFilter
     wrap_itkCurvesLevelSetImageFilter

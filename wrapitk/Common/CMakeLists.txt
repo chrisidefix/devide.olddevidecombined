@@ -1,10 +1,10 @@
 # create a list of cable config files for wrapping
 SET(WRAP_SOURCES
   wrap_ITKCommonBase
-#  wrap_ITKInterpolators
+  wrap_ITKInterpolators
 #  wrap_ITKKernelDeformableTransforms
 #  wrap_ITKRegions
-#  wrap_ITKRigidTransforms
+  wrap_ITKRigidTransforms
 #  wrap_ITKSimilarityTransforms
   wrap_SwigExtras
   wrap_itkArray
@@ -13,11 +13,11 @@ SET(WRAP_SOURCES
 #  wrap_itkBSplineDeformableTransform
 #  wrap_itkBinaryBallStructuringElement
 #  wrap_itkContinuousIndex
-#  wrap_itkDenseFiniteDifferenceImageFilter
+  wrap_itkDenseFiniteDifferenceImageFilter
 #  wrap_itkDifferenceImageFilter
-#  wrap_itkEventObject
-#  wrap_itkFiniteDifferenceImageFilter
-#  wrap_itkFixedArray
+  wrap_itkEventObject
+  wrap_itkFiniteDifferenceImageFilter
+  wrap_itkFixedArray
 #  wrap_itkFunctionBase
 #  wrap_itkIdentityTransform
   wrap_itkImage_2D
@@ -26,17 +26,17 @@ SET(WRAP_SOURCES
 #  wrap_itkImageConstIterator
 #  wrap_itkImageRegionIterator
 #  wrap_itkImageRegionConstIterator
-#  wrap_itkImageSource
-#  wrap_itkImageToImageFilter_2D
-#  wrap_itkImageToImageFilter_3D
-#  wrap_itkInPlaceImageFilter
+  wrap_itkImageSource
+  wrap_itkImageToImageFilter_2D
+  wrap_itkImageToImageFilter_3D
+  wrap_itkInPlaceImageFilter
   wrap_itkIndex
   wrap_itkLevelSet
   wrap_itkNeighborhood
   wrap_itkPoint
   wrap_itkSize
 #  wrap_itkScaleTransform
-#  wrap_itkTransform
+  wrap_itkTransform
 #  wrap_itkTranslationTransform
   wrap_itkVector
 #  wrap_itkVersorTransform

@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_ITKBasicFiltersA.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/04 00:39:56 $
-  Version:   $Revision: 1.2 $
+  Date:      $Date: 2004/12/05 00:17:02 $
+  Version:   $Revision: 1.3 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -42,7 +42,7 @@ namespace _cable_
 //    ITK_WRAP_GROUP(itkGrayscaleErodeImageFilter),
 //    ITK_WRAP_GROUP(itkIsolatedConnectedImageFilter),
     ITK_WRAP_GROUP(itkImportImageFilter),
-//    ITK_WRAP_GROUP(itkLaplacianImageFilter),
+    ITK_WRAP_GROUP(itkLaplacianImageFilter),
 //    ITK_WRAP_GROUP(itkMinimumMaximumImageCalculator),
     ITK_WRAP_GROUP(itkNeighborhoodConnectedImageFilter),
 //    ITK_WRAP_GROUP(itkSobelEdgeDetectionImageFilter),

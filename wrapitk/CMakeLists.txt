@@ -9,11 +9,9 @@ MESSAGE(FATAL_ERROR "This requires an ITK build.")
 ENDIF(ITK_FOUND)
 
 FIND_PACKAGE(CableSwig)
-IF(CableSwig_FOUND)
-INCLUDE(${CableSwig_USE_FILE})
-ELSE(CableSwig_FOUND)
+IF(!CableSwig_FOUND)
 MESSAGE(FATAL_ERROR "CableSwig build required.")
-ENDIF(CableSwig_FOUND)
+ENDIF(!CableSwig_FOUND)
 
 # We have found CableSwig.  Use the settings.
 SET(CABLE_INDEX ${CableSwig_cableidx_EXE})
@@ -318,14 +316,13 @@ ENDIF(ITK_CSWIG_JAVA)
 SET(SWIG_INC
   ${WrapITK_SOURCE_DIR}
   ${ITK_INCLUDE_DIRS}
-  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig
-  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/Common
-  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/VXLNumerics
-  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/Numerics
-  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/BasicFiltersA
-  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/BasicFiltersB
-  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/IO
-  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/Algorithms
+  ${WrapITK_SOURCE_DIR}/Common
+  ${WrapITK_SOURCE_DIR}/VXLNumerics
+  ${WrapITK_SOURCE_DIR}/Numerics
+  ${WrapITK_SOURCE_DIR}/BasicFiltersA
+  ${WrapITK_SOURCE_DIR}/BasicFiltersB
+  ${WrapITK_SOURCE_DIR}/IO
+  ${WrapITK_SOURCE_DIR}/Algorithms
   )
 ADD_DEFINITIONS(-DSWIG_GLOBAL)
 
