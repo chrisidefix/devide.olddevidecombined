@@ -1,4 +1,4 @@
-PROJECT(WrapITKTiny)
+PROJECT(WrapITK)
 
 # first find all our requirements
 FIND_PACKAGE(ITK)
@@ -88,7 +88,7 @@ MACRO(GCCXML_CREATE_XML_FILE Source Bin Input Output Library)
      IF(EXISTS ${Bin}/${Output}.depend)
      ELSE(EXISTS ${Bin}/${Output}.depend)
        CONFIGURE_FILE(
-         ${WrapITKTiny_SOURCE_DIR}/empty.depend.in
+         ${WrapITK_SOURCE_DIR}/empty.depend.in
          ${Bin}/${Output}.depend @ONLY IMMEDIATE)
      ENDIF(EXISTS ${Bin}/${Output}.depend)
      INCLUDE(${Bin}/${Output}.depend)
@@ -120,7 +120,7 @@ MACRO(GCCXML_CREATE_XML_FILE Source Bin Input Output Library)
    IF(CABLE_SWIG_DEPEND_REGENERATE)
      SET(CABLE_SWIG_DEPEND ${Bin}/${Output}.depend)
      CONFIGURE_FILE(
-       ${WrapITKTiny_SOURCE_DIR}/empty.depend.in
+       ${WrapITK_SOURCE_DIR}/empty.depend.in
        ${Bin}/${Output}.depend @ONLY IMMEDIATE)
    ENDIF(CABLE_SWIG_DEPEND_REGENERATE)
 
@@ -239,7 +239,7 @@ MACRO(CSWIG_CREATE_JAVA_CXX_FILE Bin MasterIdx InputIdx InputXml OutputTclCxx Li
           -I${ITK_SWIG_DEFAULT_LIB}/java
           ${ITK_SWG_FILE}
           -noruntime ${CINDEX} ${IGNORE_WARNINGS} -depend ${Bin}/${InputXml}.depend
-          -outdir ${WrapITKTiny_BINARY_DIR}/Java/InsightToolkit
+          -outdir ${WrapITK_BINARY_DIR}/Java/InsightToolkit
           -o ${Bin}/${OutputTclCxx} -package InsightToolkit -java -c++ ${Bin}/${InputXml}
      TARGET ${Library}
      OUTPUTS ${Bin}/${OutputTclCxx}
@@ -310,16 +310,16 @@ IF(ITK_CSWIG_JAVA)
 ENDIF(ITK_CSWIG_JAVA)
 
 SET(SWIG_INC
-  ${WrapITKTiny_SOURCE_DIR}
+  ${WrapITK_SOURCE_DIR}
   ${ITK_INCLUDE_DIRS}
-  ${WrapITKTiny_SOURCE_DIR}/Wrapping/CSwig
-  ${WrapITKTiny_SOURCE_DIR}/Wrapping/CSwig/Common
-  ${WrapITKTiny_SOURCE_DIR}/Wrapping/CSwig/VXLNumerics
-  ${WrapITKTiny_SOURCE_DIR}/Wrapping/CSwig/Numerics
-  ${WrapITKTiny_SOURCE_DIR}/Wrapping/CSwig/BasicFiltersA
-  ${WrapITKTiny_SOURCE_DIR}/Wrapping/CSwig/BasicFiltersB
-  ${WrapITKTiny_SOURCE_DIR}/Wrapping/CSwig/IO
-  ${WrapITKTiny_SOURCE_DIR}/Wrapping/CSwig/Algorithms
+  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig
+  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/Common
+  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/VXLNumerics
+  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/Numerics
+  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/BasicFiltersA
+  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/BasicFiltersB
+  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/IO
+  ${WrapITK_SOURCE_DIR}/Wrapping/CSwig/Algorithms
   )
 ADD_DEFINITIONS(-DSWIG_GLOBAL)
 
@@ -345,19 +345,19 @@ SET(ITK_CSWIG_PACKAGE_DIR_BUILD "${ITK_LIBRARY_PATH}")
 SET(ITK_CSWIG_CONFIGURATION_TYPES ${CMAKE_CONFIGURATION_TYPES})
 SET(ITK_CSWIG_DATA_ROOT "${ITK_DATA_ROOT}")
 SET(ITK_CSWIG_TEST_ROOT "${ITK_BINARY_DIR}/Testing")
-SET(ITK_CSWIG_SCRIPT_DIR "${WrapITKTiny_SOURCE_DIR}/Tcl")
+SET(ITK_CSWIG_SCRIPT_DIR "${WrapITK_SOURCE_DIR}/Tcl")
 
 IF(ITK_CSWIG_CONFIGURATION_TYPES)
   FOREACH(config ${ITK_CSWIG_CONFIGURATION_TYPES})
     SET(ITK_CSWIG_PACKAGE_DIR "${ITK_CSWIG_PACKAGE_DIR_BUILD}/${config}")
-    CONFIGURE_FILE("${WrapITKTiny_SOURCE_DIR}/Tcl/pkgIndex.tcl.in"
-                   "${WrapITKTiny_BINARY_DIR}/Tcl/${config}/pkgIndex.tcl"
+    CONFIGURE_FILE("${WrapITK_SOURCE_DIR}/Tcl/pkgIndex.tcl.in"
+                   "${WrapITK_BINARY_DIR}/Tcl/${config}/pkgIndex.tcl"
                    @ONLY IMMEDIATE)
   ENDFOREACH(config)
 ELSE(ITK_CSWIG_CONFIGURATION_TYPES)
   SET(ITK_CSWIG_PACKAGE_DIR "${ITK_CSWIG_PACKAGE_DIR_BUILD}")
-  CONFIGURE_FILE("${WrapITKTiny_SOURCE_DIR}/Tcl/pkgIndex.tcl.in"
-                 "${WrapITKTiny_BINARY_DIR}/Tcl/pkgIndex.tcl"
+  CONFIGURE_FILE("${WrapITK_SOURCE_DIR}/Tcl/pkgIndex.tcl.in"
+                 "${WrapITK_BINARY_DIR}/Tcl/pkgIndex.tcl"
                  @ONLY IMMEDIATE)
 ENDIF(ITK_CSWIG_CONFIGURATION_TYPES)
 
@@ -368,11 +368,11 @@ SET(ITK_CSWIG_SCRIPT_DIR "[file dirname [info script]]")
 SET(ITK_CSWIG_PACKAGE_DIR "[file dirname [file dirname [info script]]]")
 SET(ITK_CSWIG_DATA_ROOT "[file dirname [file dirname [info script]]]/Data")
 SET(ITK_CSWIG_TEST_ROOT "<NO_DEFAULT>")
-CONFIGURE_FILE("${WrapITKTiny_SOURCE_DIR}/Tcl/pkgIndex.tcl.in"
-               "${WrapITKTiny_BINARY_DIR}/Tcl/InstallOnly/Hide/pkgIndex.tcl"
+CONFIGURE_FILE("${WrapITK_SOURCE_DIR}/Tcl/pkgIndex.tcl.in"
+               "${WrapITK_BINARY_DIR}/Tcl/InstallOnly/Hide/pkgIndex.tcl"
                IMMEDIATE @ONLY)
 INSTALL_FILES(/lib/InsightToolkit/tcl FILES
-              "${WrapITKTiny_BINARY_DIR}/Tcl/InstallOnly/Hide/pkgIndex.tcl")
+              "${WrapITK_BINARY_DIR}/Tcl/InstallOnly/Hide/pkgIndex.tcl")
 
 #-----------------------------------------------------------------------------
 # Configure python packages.
@@ -381,14 +381,14 @@ SET(ITK_CSWIG_TEST_ROOT "'${ITK_BINARY_DIR}/Testing'")
 IF(ITK_CSWIG_CONFIGURATION_TYPES)
   FOREACH(config ${ITK_CSWIG_CONFIGURATION_TYPES})
     SET(ITK_CSWIG_PACKAGE_DIR "'${ITK_CSWIG_PACKAGE_DIR_BUILD}/${config}'")
-    CONFIGURE_FILE("${WrapITKTiny_SOURCE_DIR}/Python/itkbase.py.in"
-                   "${WrapITKTiny_BINARY_DIR}/Python/${config}/itkbase.py"
+    CONFIGURE_FILE("${WrapITK_SOURCE_DIR}/Python/itkbase.py.in"
+                   "${WrapITK_BINARY_DIR}/Python/${config}/itkbase.py"
                    @ONLY IMMEDIATE)
   ENDFOREACH(config)
 ELSE(ITK_CSWIG_CONFIGURATION_TYPES)
   SET(ITK_CSWIG_PACKAGE_DIR "'${ITK_CSWIG_PACKAGE_DIR_BUILD}'")
-  CONFIGURE_FILE("${WrapITKTiny_SOURCE_DIR}/Python/itkbase.py.in"
-                 "${WrapITKTiny_BINARY_DIR}/Python/itkbase.py"
+  CONFIGURE_FILE("${WrapITK_SOURCE_DIR}/Python/itkbase.py.in"
+                 "${WrapITK_BINARY_DIR}/Python/itkbase.py"
                  @ONLY IMMEDIATE)
 ENDIF(ITK_CSWIG_CONFIGURATION_TYPES)
 
@@ -418,7 +418,7 @@ IF(PYTHON_EXECUTABLE AND ITK_CSWIG_PYTHON)
   ADD_CUSTOM_TARGET(itkpython_pyc ALL echo "...")
 
   # Make the necessary directories.
-  MAKE_DIRECTORY(${WrapITKTiny_BINARY_DIR}/Python)
+  MAKE_DIRECTORY(${WrapITK_BINARY_DIR}/Python)
 
   # Now create a list of Python files.
   SET(ITK_PYTHON_FILES)
@@ -443,12 +443,12 @@ IF(PYTHON_EXECUTABLE AND ITK_CSWIG_PYTHON)
   SET(ITK_PYTHON_OUTPUT_FILES)
   IF(ITK_CSWIG_CONFIGURATION_TYPES)
     FOREACH(file ${ITK_PYTHON_FILES})
-      SET(src "${WrapITKTiny_BINARY_DIR}/Python/${CMAKE_CFG_INTDIR}/${file}.py")
+      SET(src "${WrapITK_BINARY_DIR}/Python/${CMAKE_CFG_INTDIR}/${file}.py")
       SET(ITK_PYTHON_SOURCE_FILES ${ITK_PYTHON_SOURCE_FILES} ${src})
     ENDFOREACH(file)
   ELSE(ITK_CSWIG_CONFIGURATION_TYPES)
     FOREACH(file ${ITK_PYTHON_FILES})
-      SET(src "${WrapITKTiny_BINARY_DIR}/Python/${file}.py")
+      SET(src "${WrapITK_BINARY_DIR}/Python/${file}.py")
       SET(ITK_PYTHON_SOURCE_FILES ${ITK_PYTHON_SOURCE_FILES} ${src})
     ENDFOREACH(file)
   ENDIF(ITK_CSWIG_CONFIGURATION_TYPES)
@@ -457,8 +457,8 @@ IF(PYTHON_EXECUTABLE AND ITK_CSWIG_PYTHON)
   ELSE ("${ITK_BINARY_DIR}" MATCHES "^${ITK_SOURCE_DIR}$")
     IF(ITK_CSWIG_CONFIGURATION_TYPES)
       FOREACH(file ${ITK_PYTHON_FILES})
-        SET(src "${WrapITKTiny_SOURCE_DIR}/Python/${file}.py")
-        SET(tgt "${WrapITKTiny_BINARY_DIR}/Python/${CMAKE_CFG_INTDIR}/${file}.py")
+        SET(src "${WrapITK_SOURCE_DIR}/Python/${file}.py")
+        SET(tgt "${WrapITK_BINARY_DIR}/Python/${CMAKE_CFG_INTDIR}/${file}.py")
         ADD_CUSTOM_COMMAND(SOURCE ${src}
                            COMMAND ${CMAKE_COMMAND}
                            ARGS -E copy ${src} ${tgt}
@@ -468,8 +468,8 @@ IF(PYTHON_EXECUTABLE AND ITK_CSWIG_PYTHON)
       ENDFOREACH(file)
     ELSE(ITK_CSWIG_CONFIGURATION_TYPES)
       FOREACH(file ${ITK_PYTHON_FILES})
-        SET(src "${WrapITKTiny_SOURCE_DIR}/Python/${file}.py")
-        SET(tgt "${WrapITKTiny_BINARY_DIR}/Python/${file}.py")
+        SET(src "${WrapITK_SOURCE_DIR}/Python/${file}.py")
+        SET(tgt "${WrapITK_BINARY_DIR}/Python/${file}.py")
         ADD_CUSTOM_COMMAND(SOURCE ${src}
  		         COMMAND ${CMAKE_COMMAND}
                           ARGS -E copy ${src} ${tgt}
@@ -481,24 +481,24 @@ IF(PYTHON_EXECUTABLE AND ITK_CSWIG_PYTHON)
   ENDIF ("${ITK_BINARY_DIR}" MATCHES "^${ITK_SOURCE_DIR}$")
   
   # Byte compile the Python files.
-  WRITE_FILE(${WrapITKTiny_BINARY_DIR}/Python/compile_all_itk
+  WRITE_FILE(${WrapITK_BINARY_DIR}/Python/compile_all_itk
         "import compileall\n"
-        "compileall.compile_dir('${WrapITKTiny_BINARY_DIR}/Python')\n"
-	"file = open('${WrapITKTiny_BINARY_DIR}/Python/itk_compile_complete', 'w')\n"
+        "compileall.compile_dir('${WrapITK_BINARY_DIR}/Python')\n"
+	"file = open('${WrapITK_BINARY_DIR}/Python/itk_compile_complete', 'w')\n"
 	"file.write('Done')\n")
 
   ADD_CUSTOM_COMMAND(
-    SOURCE ${WrapITKTiny_BINARY_DIR}/Python/compile_all_itk
+    SOURCE ${WrapITK_BINARY_DIR}/Python/compile_all_itk
     COMMAND ${PYTHON_EXECUTABLE}
-    ARGS ${WrapITKTiny_BINARY_DIR}/Python/compile_all_itk
+    ARGS ${WrapITK_BINARY_DIR}/Python/compile_all_itk
     DEPENDS ${ITK_PYTHON_SOURCE_FILES}
-    OUTPUTS "${WrapITKTiny_BINARY_DIR}/Python/itk_compile_complete"
+    OUTPUTS "${WrapITK_BINARY_DIR}/Python/itk_compile_complete"
     TARGET itkpython_pyc
     )
 
   ADD_CUSTOM_COMMAND(
     SOURCE itkpython_pyc
-    DEPENDS "${WrapITKTiny_BINARY_DIR}/Python/itk_compile_complete"
+    DEPENDS "${WrapITK_BINARY_DIR}/Python/itk_compile_complete"
     TARGET itkpython_pyc
     )
 
@@ -521,36 +521,36 @@ IF(ITK_CSWIG_PYTHON)
       # Ultra-hackery to install the generated python files.  This is not
       # officially supported by cmake and abuses the implementation of
       # make install.  Good luck figuring out how this works.
-      CONFIGURE_FILE(${WrapITKTiny_SOURCE_DIR}/pythonfiles.sh.in
-        ${WrapITKTiny_BINARY_DIR}/pythonfiles.sh @ONLY IMMEDIATE)
-      EXEC_PROGRAM(chmod ${WrapITKTiny_BINARY_DIR} ARGS 755 pythonfiles.sh
+      CONFIGURE_FILE(${WrapITK_SOURCE_DIR}/pythonfiles.sh.in
+        ${WrapITK_BINARY_DIR}/pythonfiles.sh @ONLY IMMEDIATE)
+      EXEC_PROGRAM(chmod ${WrapITK_BINARY_DIR} ARGS 755 pythonfiles.sh
         OUTPUT_VARIABLE ITK_EXEC_PLEASE_BE_QUIET)
-      INSTALL_FILES(/lib/InsightToolkit FILES "`${WrapITKTiny_BINARY_DIR}/pythonfiles.sh`")
+      INSTALL_FILES(/lib/InsightToolkit FILES "`${WrapITK_BINARY_DIR}/pythonfiles.sh`")
     ENDIF(UNIX)
   ELSE(ITK_OLD_CMAKE_INSTALL)
     CONFIGURE_FILE(
-      "${WrapITKTiny_SOURCE_DIR}/pythonfiles_install.cmake.in"
-      "${WrapITKTiny_BINARY_DIR}/pythonfiles_install.cmake"
+      "${WrapITK_SOURCE_DIR}/pythonfiles_install.cmake.in"
+      "${WrapITK_BINARY_DIR}/pythonfiles_install.cmake"
       @ONLY IMMEDIATE)
     ADD_CUSTOM_TARGET(python_install)
     SET_TARGET_PROPERTIES(python_install PROPERTIES
-      POST_INSTALL_SCRIPT "${WrapITKTiny_BINARY_DIR}/pythonfiles_install.cmake")
+      POST_INSTALL_SCRIPT "${WrapITK_BINARY_DIR}/pythonfiles_install.cmake")
   ENDIF(ITK_OLD_CMAKE_INSTALL)
 
   # Install the package python files.
   FOREACH(file ${ITK_PYTHON_FILES})
     INSTALL_FILES(/lib/InsightToolkit/python FILES
-      "${WrapITKTiny_BINARY_DIR}/Python/${file}.py")
+      "${WrapITK_BINARY_DIR}/Python/${file}.py")
   ENDFOREACH(file)
   
   SET(ITK_CSWIG_PACKAGE_DIR "os.path.dirname(selfpath)")
   SET(ITK_CSWIG_DATA_ROOT "os.path.join(os.path.dirname(selfpath),'Data')")
   SET(ITK_CSWIG_TEST_ROOT "'<NO_DEFAULT>'")
-  CONFIGURE_FILE("${WrapITKTiny_SOURCE_DIR}/Python/itkbase.py.in"
-                 "${WrapITKTiny_BINARY_DIR}/Python/InstallOnly/itkbase.py"
+  CONFIGURE_FILE("${WrapITK_SOURCE_DIR}/Python/itkbase.py.in"
+                 "${WrapITK_BINARY_DIR}/Python/InstallOnly/itkbase.py"
                  @ONLY IMMEDIATE)
   INSTALL_FILES(/lib/InsightToolkit/python FILES
-    "${WrapITKTiny_BINARY_DIR}/Python/InstallOnly/itkbase.py")
+    "${WrapITK_BINARY_DIR}/Python/InstallOnly/itkbase.py")
 ENDIF(ITK_CSWIG_PYTHON)
 
 
@@ -565,8 +565,8 @@ MACRO(ITK_WRAP_LIBRARY WRAP_SOURCES LIBRARY_NAME DIRECTORY DEPEND_LIBRARY EXTRA_
     SET(WRAP_JAVA_SOURCES ${WRAP_JAVA_SOURCES} ${Source}Java.cxx)
     STRING(REGEX REPLACE wrap_ "" JAVA_DEP ${Source})
     SET(${LIBRARY_NAME}_JAVA_DEPENDS_INIT ${${LIBRARY_NAME}_JAVA_DEPENDS_INIT} ${JAVA_DEP}.java)
-    SET(ALL_IDX_FILES ${ALL_IDX_FILES} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}/${Source}.idx )
-    SET(INDEX_FILE_CONTENT "${INDEX_FILE_CONTENT}${WrapITKTiny_BINARY_DIR}/${DIRECTORY}/${Source}.idx\n")
+    SET(ALL_IDX_FILES ${ALL_IDX_FILES} ${WrapITK_BINARY_DIR}/${DIRECTORY}/${Source}.idx )
+    SET(INDEX_FILE_CONTENT "${INDEX_FILE_CONTENT}${WrapITK_BINARY_DIR}/${DIRECTORY}/${Source}.idx\n")
   ENDFOREACH(Source)
   SET(${LIBRARY_NAME}_JAVA_DEPENDS  "${${LIBRARY_NAME}_JAVA_DEPENDS_INIT}" CACHE INTERNAL "" FORCE)
   # add the package wrappers 
@@ -707,7 +707,7 @@ MACRO(ITK_WRAP_LIBRARY WRAP_SOURCES LIBRARY_NAME DIRECTORY DEPEND_LIBRARY EXTRA_
       SET_SOURCE_FILES_PROPERTIES(${ITK_SWIG_FILE_CXX}Java.cxx GENERATED)
       SET(WRAP_FILE ${ITK_SWIG_FILE_CXX}Java.cxx )
     ENDIF(ITK_SWIG_FILE)
-    MAKE_DIRECTORY("${WrapITKTiny_BINARY_DIR}/Java/InsightToolkit")
+    MAKE_DIRECTORY("${WrapITK_BINARY_DIR}/Java/InsightToolkit")
     ADD_LIBRARY(${LIBRARY_NAME}Java MODULE 
       ${WRAP_JAVA_SOURCES} 
       ${ITK_EXTRA_JAVA_SOURCES} 
@@ -727,7 +727,7 @@ MACRO(ITK_WRAP_LIBRARY WRAP_SOURCES LIBRARY_NAME DIRECTORY DEPEND_LIBRARY EXTRA_
         COMMAND ${CSWIG} 
         ARGS -nocable -noruntime ${IGNORE_WARNINGS} -o ${WRAP_FILE} 
         -I${ITK_TOP}/Code/Common -DITKCommon_EXPORT=
-        -outdir ${WrapITKTiny_BINARY_DIR}/Java/InsightToolkit
+        -outdir ${WrapITK_BINARY_DIR}/Java/InsightToolkit
         -package InsightToolkit -java -c++ ${ITK_SWIG_FILE}
         TARGET ${LIBRARY_NAME}Java
         OUTPUTS ${WRAP_FILE}
@@ -736,40 +736,40 @@ MACRO(ITK_WRAP_LIBRARY WRAP_SOURCES LIBRARY_NAME DIRECTORY DEPEND_LIBRARY EXTRA_
   ENDIF(ITK_CSWIG_JAVA)
   
   CONFIGURE_FILE(
-    ${WrapITKTiny_SOURCE_DIR}/Master.mdx.in
-    ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}/${LIBRARY_NAME}.mdx IMMEDIATE
+    ${WrapITK_SOURCE_DIR}/Master.mdx.in
+    ${WrapITK_BINARY_DIR}/${DIRECTORY}/${LIBRARY_NAME}.mdx IMMEDIATE
     )
 
-  SET(SWIG_INC_FILE ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}/SwigInc.txt)
+  SET(SWIG_INC_FILE ${WrapITK_BINARY_DIR}/${DIRECTORY}/SwigInc.txt)
   SET(SWIG_INC_CONTENTS)
   FOREACH(dir ${SWIG_INC})
     SET(SWIG_INC_CONTENTS "${SWIG_INC_CONTENTS}-I${dir}\n")
   ENDFOREACH(dir)
-  CONFIGURE_FILE(${WrapITKTiny_SOURCE_DIR}/SwigInc.txt.in ${SWIG_INC_FILE}
+  CONFIGURE_FILE(${WrapITK_SOURCE_DIR}/SwigInc.txt.in ${SWIG_INC_FILE}
     @ONLY IMMEDIATE)
   
   FOREACH(Source ${WRAP_SOURCES})
     IF(ITK_CSWIG_TCL)
       # tcl 
-      WRAP_TCL_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+      WRAP_TCL_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
         ${Source} ${LIBRARY_NAME}Tcl "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
     ENDIF(ITK_CSWIG_TCL)
 
     IF(ITK_CSWIG_PERL)
       # tcl 
-      WRAP_PERL_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+      WRAP_PERL_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
         ${Source} ${LIBRARY_NAME}Perl "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
     ENDIF(ITK_CSWIG_PERL)
     
     IF(ITK_CSWIG_PYTHON)
       # python
-      WRAP_PYTHON_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY} 
+      WRAP_PYTHON_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY} 
         ${Source} _${LIBRARY_NAME}Python "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
     ENDIF(ITK_CSWIG_PYTHON)
     
     IF(ITK_CSWIG_JAVA)
       # java
-      WRAP_JAVA_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+      WRAP_JAVA_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
         ${Source} ${LIBRARY_NAME}Java "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
     ENDIF(ITK_CSWIG_JAVA)
   ENDFOREACH(Source)
@@ -778,31 +778,31 @@ MACRO(ITK_WRAP_LIBRARY WRAP_SOURCES LIBRARY_NAME DIRECTORY DEPEND_LIBRARY EXTRA_
   # wrap the package files for tcl and python
   IF(ITK_CSWIG_TCL)
     # tcl 
-    WRAP_TCL_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+    WRAP_TCL_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
       wrap_${LIBRARY_NAME}Tcl ${LIBRARY_NAME}Tcl "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
     IF(ITK_EXTRA_TCL_WRAP)
-      WRAP_TCL_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+      WRAP_TCL_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
         "${ITK_EXTRA_TCL_WRAP}" ${LIBRARY_NAME}Tcl "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
     ENDIF(ITK_EXTRA_TCL_WRAP)
   ENDIF(ITK_CSWIG_TCL)
 
   IF(ITK_CSWIG_PERL)
     # perl
-    WRAP_PERL_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+    WRAP_PERL_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
       wrap_${LIBRARY_NAME}Perl ${LIBRARY_NAME}Perl "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
     IF(ITK_EXTRA_PERL_WRAP)
-      WRAP_PERL_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+      WRAP_PERL_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
         "${ITK_EXTRA_PERL_WRAP}" ${LIBRARY_NAME}Perl "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
     ENDIF(ITK_EXTRA_PERL_WRAP)
   ENDIF(ITK_CSWIG_PERL)
    
   IF(ITK_CSWIG_PYTHON)
     # python
-    WRAP_PYTHON_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+    WRAP_PYTHON_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
       wrap_${LIBRARY_NAME}Python _${LIBRARY_NAME}Python "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
     IF(ITK_EXTRA_PYTHON_WRAP)
       FOREACH( extraPython ${ITK_EXTRA_PYTHON_WRAP})
-        WRAP_PYTHON_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+        WRAP_PYTHON_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
           ${extraPython} _${LIBRARY_NAME}Python "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
       ENDFOREACH( extraPython )
     ENDIF(ITK_EXTRA_PYTHON_WRAP)
@@ -811,7 +811,7 @@ MACRO(ITK_WRAP_LIBRARY WRAP_SOURCES LIBRARY_NAME DIRECTORY DEPEND_LIBRARY EXTRA_
 
   IF(ITK_CSWIG_JAVA)
     # python
-    WRAP_JAVA_SOURCES(${WrapITKTiny_SOURCE_DIR}/${DIRECTORY} ${WrapITKTiny_BINARY_DIR}/${DIRECTORY}
+    WRAP_JAVA_SOURCES(${WrapITK_SOURCE_DIR}/${DIRECTORY} ${WrapITK_BINARY_DIR}/${DIRECTORY}
       wrap_${LIBRARY_NAME}Java ${LIBRARY_NAME}Java "${MASTER_INDEX_FILES}" "${ALL_IDX_FILES}")
   ENDIF(ITK_CSWIG_JAVA)
 
