@@ -10,7 +10,7 @@ else:
     selfpath = os.path.abspath(os.path.dirname(__file__))
 
 # The directory containing the binary ITK python wrapper libraries.
-pkgdir = @ITK_CSWIG_PACKAGE_DIR@
+pkgdir = @PKG_DIR@
 
 # Python "help(sys.setdlopenflags)" states:
 #

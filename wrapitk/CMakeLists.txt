@@ -9,6 +9,12 @@ MESSAGE(FATAL_ERROR "This requires an ITK build.")
 ENDIF(ITK_FOUND)
 
 FIND_PACKAGE(CableSwig)
+IF(CableSwig_FOUND)
+INCLUDE(${CableSwig_USE_FILE})
+ELSE(CableSwig_FOUND)
+MESSAGE(FATAL_ERROR "CableSwig build required.")
+ENDIF(CableSwig_FOUND)
+
 # We have found CableSwig.  Use the settings.
 SET(CABLE_INDEX ${CableSwig_cableidx_EXE})
 SET(CSWIG ${CableSwig_cswig_EXE})
@@ -380,13 +386,13 @@ SET(ITK_CSWIG_DATA_ROOT "'${ITK_DATA_ROOT}'")
 SET(ITK_CSWIG_TEST_ROOT "'${ITK_BINARY_DIR}/Testing'")
 IF(ITK_CSWIG_CONFIGURATION_TYPES)
   FOREACH(config ${ITK_CSWIG_CONFIGURATION_TYPES})
-    SET(ITK_CSWIG_PACKAGE_DIR "'${ITK_CSWIG_PACKAGE_DIR_BUILD}/${config}'")
+    SET(PKG_DIR "'${WrapITK_BINARY_DIR}/Python/${config}'")
     CONFIGURE_FILE("${WrapITK_SOURCE_DIR}/Python/itkbase.py.in"
                    "${WrapITK_BINARY_DIR}/Python/${config}/itkbase.py"
                    @ONLY IMMEDIATE)
   ENDFOREACH(config)
 ELSE(ITK_CSWIG_CONFIGURATION_TYPES)
-  SET(ITK_CSWIG_PACKAGE_DIR "'${ITK_CSWIG_PACKAGE_DIR_BUILD}'")
+  SET(PKG_DIR "'${WrapITK_BINARY_DIR}/Python'")
   CONFIGURE_FILE("${WrapITK_SOURCE_DIR}/Python/itkbase.py.in"
                  "${WrapITK_BINARY_DIR}/Python/itkbase.py"
                  @ONLY IMMEDIATE)
