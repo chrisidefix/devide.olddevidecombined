@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_ITKAlgorithms.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/04 21:21:54 $
-  Version:   $Revision: 1.3 $
+  Date:      $Date: 2004/12/04 21:55:32 $
+  Version:   $Revision: 1.4 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -25,6 +25,7 @@ namespace _cable_
     ITK_WRAP_GROUP(itkCurvatureFlowImageFilter),
     ITK_WRAP_GROUP(itkDemonsRegistrationFilter),
     ITK_WRAP_GROUP(itkHistogramMatchingImageFilter),
+    ITK_WRAP_GROUP(itkLevelSetMotionRegistrationFilter),
 //    ITK_WRAP_GROUP(itkImageRegistrationMethod),
 //    ITK_WRAP_GROUP(itkImageToImageMetric),
 //    ITK_WRAP_GROUP(itkMeanSquaresImageToImageMetric),
@@ -45,6 +46,7 @@ namespace _cable_
     ITK_WRAP_GROUP(itkPDEDeformableRegistrationFilter),
 //    ITK_WRAP_GROUP(itkRecursiveMultiResolutionPyramidImageFilter),
 //    ITK_WRAP_GROUP(itkVoronoiSegmentationImageFilter),
+    ITK_WRAP_GROUP(itkSymmetricForcesDemonsRegistrationFilter),
     ITK_WRAP_GROUP(itkWatershedImageFilter)
   };
 }

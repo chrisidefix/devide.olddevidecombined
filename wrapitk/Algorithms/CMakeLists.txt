@@ -3,6 +3,7 @@ SET(WRAP_SOURCES
     wrap_itkCurvatureFlowImageFilter
     wrap_itkDemonsRegistrationFilter
     wrap_itkHistogramMatchingImageFilter
+    wrap_itkLevelSetMotionRegistrationFilter
 #    wrap_itkImageRegistrationMethod
 #    wrap_itkImageToImageMetric
 #    wrap_itkMattesMutualInformationImageToImageMetric
@@ -24,6 +25,7 @@ SET(WRAP_SOURCES
     wrap_itkPDEDeformableRegistrationFilter
     wrap_itkNarrowBandCurvesLevelSetImageFilter
 #    wrap_itkVoronoiSegmentationImageFilter
+    wrap_itkSymmetricForcesDemonsRegistrationFilter
     wrap_itkWatershedImageFilter
 )
 
