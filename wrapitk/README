@@ -1,3 +1,11 @@
+IMPORTANT NOTE: This is a special version of the ITK Wrapping/CSwig
+repository that can build outside of ITK.  This is so that we can decrease
+the size of the wrapping libraries on a per-application basis.
+
+Charl P. Botha <http://cpbotha.net/> December 2004
+
+--- Your usual programming will now continue:
+
 To use tcl or python wrapping using cswig, you will have to build
 CableSwig.   CableSwig is a combination package that includes swig,
 cable, and gccxml.   When built CableSwig will have three execuables:
