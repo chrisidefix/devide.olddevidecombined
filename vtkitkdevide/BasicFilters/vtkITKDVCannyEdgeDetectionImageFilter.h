@@ -3,8 +3,8 @@
   Program:   Visualization Toolkit
   Module:    $RCSfile: vtkITKDVCannyEdgeDetectionImageFilter.h,v $
   Language:  C++
-  Date:      $Date: 2004/10/22 15:01:11 $
-  Version:   $Revision: 1.1 $
+  Date:      $Date: 2004/10/23 21:40:18 $
+  Version:   $Revision: 1.2 $
 */
 // .NAME vtkITKDVCannyEdgeDetectionImageFilter - Wrapper class around itk::GrayscaleFillholeImageFilterImageFilter
 // .SECTION Description
@@ -26,23 +26,23 @@ class VTK_EXPORT vtkITKDVCannyEdgeDetectionImageFilter : public vtkITKDVImageToI
 
 
   // THRESHOLD
-  void SetThreshold(Superclass::OutputImageType d)
+  void SetThreshold(double d)
   {
     DelegateSetMacro(Threshold, d);
   }
 
-  Superclass::OutputImageType GetThreshold(void)
+  double GetThreshold(void)
   {
     DelegateGetMacro(Threshold);
   }
 
   // OUTSIDEVALUE
-  void SetOutsideValue(Superclass::OutputImageType d)
+  void SetOutsideValue(double d)
   {
     DelegateSetMacro(OutsideValue, d);
   }
 
-  Superclass::OutputImageType GetOutsideValue(void)
+  double GetOutsideValue(void)
   {
     DelegateGetMacro(OutsideValue);
   }
@@ -55,7 +55,29 @@ class VTK_EXPORT vtkITKDVCannyEdgeDetectionImageFilter : public vtkITKDVImageToI
     this->GetImageFilterPointer()->SetVariance (v);
   }
 
-  
+
+  virtual void GetVariance(double &v1, double &v2, double &v3)
+  {
+    v1 = this->GetImageFilterPointer()->GetVariance().GetElement(0);
+    v2 = this->GetImageFilterPointer()->GetVariance().GetElement(1);
+    v3 = this->GetImageFilterPointer()->GetVariance().GetElement(2);
+  }
+
+  virtual void GetVariance(double v[3])
+  {
+    this->GetVariance(v[0], v[1], v[2]);
+  }
+
+  // VERY IMPORTANT: for VTK to wrap this correctly, there HAS to be an entry in
+  // the local "hints" file specifying the number of elements in the returned array.
+  // If vtkGetVectorNMacro() is used, the hint isn't necessary (N is used)
+  virtual double *GetVariance()
+  {
+    // need to convert to ivar so we can return the pointer
+    this->GetVariance(this->TempVariance);
+    return this->TempVariance;
+  }
+
 
   // MAXIMUMERROR
   void SetMaximumError (double e1, double e2, double e3)
@@ -65,13 +87,26 @@ class VTK_EXPORT vtkITKDVCannyEdgeDetectionImageFilter : public vtkITKDVImageToI
     this->GetImageFilterPointer()->SetMaximumError (e);
   }
 
+  void SetMaximumError(double e[3])
+  {
+    this->SetMaximumError(e[0], e[1], e[2]);
+  }
+
+  void GetMaximumError(double e[3])
+  {
+    for (int i = 0; i < 3; i++)
+      {
+      e[i] = this->GetImageFilterPointer()->GetMaximumError().GetElement(i);
+      }
+  }
+
 protected:
   //BTX
   typedef itk::CannyEdgeDetectionImageFilter<Superclass::InputImageType,Superclass::OutputImageType> ImageFilterType;
   vtkITKDVCannyEdgeDetectionImageFilter() : Superclass ( ImageFilterType::New() ){};
   ~vtkITKDVCannyEdgeDetectionImageFilter() {};
   ImageFilterType* GetImageFilterPointer() { return dynamic_cast<ImageFilterType*> ( m_Filter.GetPointer() ); }
-
+  double TempVariance[3];
   //ETX
   
 private:
@@ -79,7 +114,7 @@ private:
   void operator=(const vtkITKDVCannyEdgeDetectionImageFilter&);  // Not implemented.
 };
 
-vtkCxxRevisionMacro(vtkITKDVCannyEdgeDetectionImageFilter, "$Revision: 1.1 $");
+vtkCxxRevisionMacro(vtkITKDVCannyEdgeDetectionImageFilter, "$Revision: 1.2 $");
 vtkStandardNewMacro(vtkITKDVCannyEdgeDetectionImageFilter);
 
 #endif

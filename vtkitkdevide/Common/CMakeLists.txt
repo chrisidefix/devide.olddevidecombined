@@ -29,7 +29,7 @@ ADD_LIBRARY (vtkitkdvCommon Common_SRCS)
 
 IF (VTK_WRAP_TCL AND VTKITKDV_WRAP_TCL)
 
-  VTK_WRAP_TCL2 (vtkitkdvCommonTCL CommonTCL_SRCS ${Common_SRCS})
+  VTK_WRAP_TCL (vtkitkdvCommonTCL CommonTCL_SRCS ${Common_SRCS})
   ADD_LIBRARY (vtkitkdvCommonTCL SHARED CommonTCL_SRCS)
   TARGET_LINK_LIBRARIES (vtkitkdvCommonTCL 
 			 vtkFilteringTCL
@@ -43,7 +43,7 @@ ENDIF (VTK_WRAP_TCL AND VTKITKDV_WRAP_TCL)
 
 IF (VTK_WRAP_PYTHON AND VTKITKDV_WRAP_PYTHON)
 
-  VTK_WRAP_PYTHON2 (vtkitkdvCommonPython CommonPython_SRCS ${Common_SRCS})
+  VTK_WRAP_PYTHON (vtkitkdvCommonPython CommonPython_SRCS ${Common_SRCS})
   ADD_LIBRARY(vtkitkdvCommonPython SHARED ${CommonPython_SRCS})
   TARGET_LINK_LIBRARIES(vtkitkdvCommonPython
   			vtkitkdvCommon
