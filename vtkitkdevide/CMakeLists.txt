@@ -41,6 +41,8 @@ IF (VTKITKDV_CAN_BUILD)
   #
 
   #INCLUDE_DIRECTORIES(${VTKITKDV_SOURCE_DIR}/IO)
+  INCLUDE_DIRECTORIES(${VTKITK_INCLUDE_PATH}/Common)
+  
   
   #
   # Common configuration settings
