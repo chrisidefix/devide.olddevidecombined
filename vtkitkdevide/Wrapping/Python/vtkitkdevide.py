@@ -5,6 +5,7 @@ try:
         from libvtkitkdvCommonPython import *        
         from libvtkitkdvAlgorithmsPython import *
     else:
+        from vtkitkdvCommonPython import *
         from vtkitkdvAlgorithmsPython import *
 except ImportError,e:
     print e

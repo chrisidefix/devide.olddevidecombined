@@ -24,7 +24,9 @@ IF (VTK_WRAP_TCL AND VTKITKDV_WRAP_TCL)
 
   VTK_WRAP_TCL2 (vtkitkdvAlgorithmsTCL AlgorithmsTCL_SRCS ${Algorithms_SRCS})
   ADD_LIBRARY (vtkitkdvAlgorithmsTCL SHARED AlgorithmsTCL_SRCS)
-  TARGET_LINK_LIBRARIES (vtkitkdvAlgorithmsTCL 
+  TARGET_LINK_LIBRARIES (vtkitkdvAlgorithmsTCL
+                         vtkitkdvAlgorithms
+                         vtkitkdvCommonTCL
 			 vtkFilteringTCL
 			 vtkCommonTCL)
 
@@ -40,6 +42,7 @@ IF (VTK_WRAP_PYTHON AND VTKITKDV_WRAP_PYTHON)
   ADD_LIBRARY(vtkitkdvAlgorithmsPython SHARED ${AlgorithmsPython_SRCS})
   TARGET_LINK_LIBRARIES(vtkitkdvAlgorithmsPython
   			vtkitkdvAlgorithms
+                        vtkitkdvCommonPython
 			vtkFilteringPython
 			vtkImagingPython
 			vtkCommonPython)
@@ -52,7 +55,6 @@ ENDIF (VTK_WRAP_PYTHON AND VTKITKDV_WRAP_PYTHON)
 
 TARGET_LINK_LIBRARIES (
   vtkitkdvAlgorithms
-  vtkitkdvCommonPython
   vtkFiltering
   vtkImaging
   vtkCommon
