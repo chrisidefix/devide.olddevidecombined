@@ -18,7 +18,7 @@ SET(WRAP_SOURCES
     wrap_itkGeodesicActiveContourLevelSetImageFilter
 #    wrap_itkShapeDetectionLevelSetImageFilter
     wrap_itkTPGACLevelSetImageFilter
-    wrap_itkGVFGACLevelSetImageFilter
+#    wrap_itkGVFGACLevelSetImageFilter
     wrap_itkCurvesLevelSetImageFilter
     wrap_itkNarrowBandLevelSetImageFilter
     wrap_itkPDEDeformableRegistrationFilter

@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_ITKAlgorithms.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/04 00:39:54 $
-  Version:   $Revision: 1.2 $
+  Date:      $Date: 2004/12/04 21:21:54 $
+  Version:   $Revision: 1.3 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -37,7 +37,7 @@ namespace _cable_
     ITK_WRAP_GROUP(itkGeodesicActiveContourLevelSetImageFilter),
 //    ITK_WRAP_GROUP(itkShapeDetectionLevelSetImageFilter),
     ITK_WRAP_GROUP(itkTPGACLevelSetImageFilter),
-    ITK_WRAP_GROUP(itkGVFGACLevelSetImageFilter),
+//    ITK_WRAP_GROUP(itkGVFGACLevelSetImageFilter),
     ITK_WRAP_GROUP(itkCurvesLevelSetImageFilter),
     ITK_WRAP_GROUP(itkNarrowBandLevelSetImageFilter),     
     ITK_WRAP_GROUP(itkNarrowBandCurvesLevelSetImageFilter),
