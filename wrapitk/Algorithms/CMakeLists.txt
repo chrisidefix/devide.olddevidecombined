@@ -4,10 +4,10 @@ SET(WRAP_SOURCES
     wrap_itkDemonsRegistrationFilter
     wrap_itkHistogramMatchingImageFilter
     wrap_itkLevelSetMotionRegistrationFilter
-#    wrap_itkImageRegistrationMethod
-#    wrap_itkImageToImageMetric
+    wrap_itkImageRegistrationMethod
+    wrap_itkImageToImageMetric
 #    wrap_itkMattesMutualInformationImageToImageMetric
-#    wrap_itkMeanSquaresImageToImageMetric
+    wrap_itkMeanSquaresImageToImageMetric
 #    wrap_itkMinMaxCurvatureFlowImageFilter
 #    wrap_itkMutualInformationImageToImageMetric
 #    wrap_itkMultiResolutionImageRegistrationMethod

@@ -3,8 +3,8 @@
   Program:   Insight Segmentation & Registration Toolkit
   Module:    $RCSfile: wrap_itkMeanSquaresImageToImageMetric.cxx,v $
   Language:  C++
-  Date:      $Date: 2004/12/03 23:50:14 $
-  Version:   $Revision: 1.1 $
+  Date:      $Date: 2005/01/05 15:41:45 $
+  Version:   $Revision: 1.2 $
 
   Copyright (c) Insight Software Consortium. All rights reserved.
   See ITKCopyright.txt or http://www.itk.org/HTML/Copyright.htm for details.
@@ -30,10 +30,6 @@ namespace _cable_
                      itkMeanSquaresImageToImageMetricF2F2);
     ITK_WRAP_OBJECT2(MeanSquaresImageToImageMetric, image::F3, image::F3,
                      itkMeanSquaresImageToImageMetricF3F3);
-    ITK_WRAP_OBJECT2(MeanSquaresImageToImageMetric, image::US2, image::US2,
-                     itkMeanSquaresImageToImageMetricUS2US2);
-    ITK_WRAP_OBJECT2(MeanSquaresImageToImageMetric, image::US3, image::US3,
-                     itkMeanSquaresImageToImageMetricUS3US3);
   }
 }
 
