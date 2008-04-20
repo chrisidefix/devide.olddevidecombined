@@ -62,6 +62,10 @@ def main():
         # default (I think that this has something to do with the fact
         # that the font scaling and the positioning interpret
         # position[2]coordinate differently.
+        # more or less confirmed: setting justification to centered,
+        # and y2 = y + 1.0, you can see that the positioning is
+        # perfect, but if y < 0, the font size is at its absolute
+        # minimum.
         if y < 0:
             # with y under 0, Position2Coordinate IS relative to
             # PositionCoordinate
