@@ -1,96 +1,117 @@
+# TODO: test this with a VTK head checkout as well
+
 import vtk
-import wx
-from vtk.wx.wxVTKRenderWindowInteractor import wxVTKRenderWindowInteractor
 
 def main():
-    """Like it says, just a simple example
-    """
-    # every wx app needs an app
-    app = wx.PySimpleApp()
-
-    # create the top-level frame, sizer and wxVTKRWI
-    frame = wx.Frame(None, -1, "vtk text rendering", size=(400,400))
-    widget = wxVTKRenderWindowInteractor(frame, -1)
-    sizer = wx.BoxSizer(wx.VERTICAL)
-    sizer.Add(widget, 1, wx.EXPAND)
-    frame.SetSizer(sizer)
-    frame.Layout()
-
-    # It would be more correct (API-wise) to call widget.Initialize() and
-    # widget.Start() here, but Initialize() calls RenderWindow.Render().
-    # That Render() call will get through before we can setup the 
-    # RenderWindow() to render via the wxWidgets-created context; this
-    # causes flashing on some platforms and downright breaks things on
-    # other platforms.  Instead, we call widget.Enable().  This means
-    # that the RWI::Initialized ivar is not set, but in THIS SPECIFIC CASE,
-    # that doesn't matter.
-    widget.Enable(1)
-
-    widget.AddObserver("ExitEvent", lambda o,e,f=frame: f.Close())
+    rwi = vtk.vtkRenderWindowInteractor()
 
     istyle = vtk.vtkInteractorStyleImage()
-    widget.SetInteractorStyle(istyle)
+    rwi.SetInteractorStyle(istyle)
+
+    rw = vtk.vtkRenderWindow()
+    rwi.SetRenderWindow(rw)
 
     ren = vtk.vtkRenderer()
     ren.SetBackground(1,1,1)
     ren.GetActiveCamera().SetParallelProjection(1)
-    widget.GetRenderWindow().AddRenderer(ren)
+    rw.AddRenderer(ren)
 
-    if True:
-        # vtkCaptionActor2D #####
+    rwi.Initialize()
 
-        tsa = vtk.vtkCaptionActor2D()
-        tsa.SetCaption('1: Hello World')
-        tsa.LeaderOff()
-        #tsa.BorderOff()
-
-        tsa.SetAttachmentPoint(0,0,0)
-        tsa.GetPositionCoordinate().SetValue(0.0, 0.0)   
-        tsa.GetPosition2Coordinate().SetCoordinateSystemToWorld()
-        tsa.GetPosition2Coordinate().SetValue(7,2,0)
-
-        tprop = tsa.GetCaptionTextProperty()
-        tprop.SetFontFamilyToArial()
-        tprop.SetVerticalJustificationToCentered()
-        tprop.SetFontSize(12)
-        tprop.SetBold(0)
-        tprop.SetItalic(0)
-        tprop.SetShadow(0)
-        #tprop.SetColor((1.0,1.0,1.0))
-        tprop.SetColor((0,0,0))
-
-        ############################
-
-        ren.AddActor(tsa)
-
-    if True:
+    for i in range(-4, 3, 1):
         ta = vtk.vtkTextActor()
-        ta.SetInput('2: Hello World')
+        ta.SetInput('%d: Hello World' % (i,))
         ta.ScaledTextOn()
 
+        x = 1.0 * i
+        y = 2.0 * i
+
         ta.GetPositionCoordinate().SetCoordinateSystemToWorld()
-        ta.GetPositionCoordinate().SetValue(0.0, 2.0)   
+        ta.GetPositionCoordinate().SetValue(x, y)   
+
+        # documentation claims that p2c is relative to pc, but in
+        # VTK ParaView-3-2-1 that is not the case.  x is relative, y
+        # is just plain whacky.  See below...
+
+        # CASE A:
+        # if we set y2 to 1.0 for example, everything with a y-coord
+        # above 0 has the same y-position.  Everything below 0 has
+        # half the spacing it should have
+        # see http://tinyurl.com/6jlr9e (vtktextactor_ybug_case_a.png)
+
+        # CASE B:
+        # if we try working around this by setting y2 to y+1.0 (i.e.
+        # we DON'T assume that it's relative), everything with y >= 0
+        # is fine, everything below is at the right position, but
+        # about half the height of everything with y above 0
+        # see http://tinyurl.com/6dfj47 (vtktextactor_ybug_case_b.png) 
+
+        # CASE A:
+        #y2 = 1.0
+
+        # CASE B
+        y2 = y + 1.0 
+
+        x2 = x + 7
+
         ta.GetPosition2Coordinate().SetCoordinateSystemToWorld()
-        ta.GetPosition2Coordinate().SetValue(7,3,0)
+
+        # this is a WORK-AROUND for the broken vtkTextActor position /
+        # scaling in VTK ParaView-3-2-1
+        # only works if vtkTextActor justification mode is left at
+        # default (I think that this has something to do with the fact
+        # that the font scaling and the positioning interpret
+        # position[2]coordinate differently.
+        if y < 0:
+            # with y under 0, Position2Coordinate IS relative to
+            # PositionCoordinate
+            ta.GetPosition2Coordinate().SetValue(7, 1)
+        else:
+            # with y == 0 or above, Position2Coordinate's y-coordinate
+            # has to specified absolutely
+            ta.GetPosition2Coordinate().SetValue(7, y2)
 
         tprop = ta.GetTextProperty()
         tprop.SetFontFamilyToArial()
-        tprop.SetVerticalJustificationToCentered()
-        tprop.SetFontSize(12)
+        #tprop.SetVerticalJustificationToCentered()
+        #tprop.SetFontSize(12)
         tprop.SetBold(0)
         tprop.SetItalic(0)
         tprop.SetShadow(0)
-        #tprop.SetColor((1.0,1.0,1.0))
-        tprop.SetColor((0,0,0.2))
+        tprop.SetColor((0,0,0.4))
 
         ############################
 
         ren.AddActor(ta)
 
-    # show the window
-    frame.Show()
+        # add a sphere source to calibrate
+        # this should in theory be at the same position as the
+        # vtkTextActor
+        ss = vtk.vtkSphereSource()
+        ss.SetRadius(0.1)
+        sm = vtk.vtkPolyDataMapper()
+        sm.SetInput(ss.GetOutput())
+        sa = vtk.vtkActor()
+        sa.SetMapper(sm)
+        sa.SetPosition((x,y,0))
+        ren.AddActor(sa)
 
-    app.MainLoop()
+        # add a sphere source to calibrate
+        # this should in theory be at the same position as the
+        # vtkTextActor
+        ss = vtk.vtkSphereSource()
+        ss.SetRadius(0.1)
+        sm = vtk.vtkPolyDataMapper()
+        sm.SetInput(ss.GetOutput())
+        sa = vtk.vtkActor()
+        sa.SetMapper(sm)
+        sa.SetPosition((x2,y2,0))
+        ren.AddActor(sa)
+
+    ren.ResetCamera()
+    rw.Render()
+
+    rwi.Start()
 
 if __name__ == "__main__":
     main()
