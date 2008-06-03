@@ -1,3 +1,6 @@
+# illustration of the brokenness of the current vtkTextActor w.r.t.
+# vertical positioning.
+
 # TODO: test this with a VTK head checkout as well
 
 import vtk

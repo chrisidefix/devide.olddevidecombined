@@ -1,5 +1,4 @@
 import vtk
-import vtkdevide
 
 def make_glyph(ren, pos, message):
     """vtkTextActor3D does almost exactly what I need, even
@@ -13,7 +12,7 @@ def make_glyph(ren, pos, message):
     bottom-most feature to the top-most, x-world units high.  I don't
     know how to get to the inter-line spacing yet though...
     """
-    ta = vtkdevide.vtkDVTextActor3D()
+    ta = vtk.vtkTextActor3D()
     ta.SetInput(message)
 
     tprop = ta.GetTextProperty()
@@ -28,7 +27,7 @@ def make_glyph(ren, pos, message):
     ta.SetPosition((pos[0], pos[1],0))
     #ta.SetPosition((pos[0], pos[1]))
 
-    ta.UpdateImageActor()
+    #ta.UpdateImageActor()
 
     # I have *NO* idea why I have to this, but if I don't,  I get the
     # following error message with "What ghte hell" (it's the 'g'):
@@ -42,7 +41,7 @@ def make_glyph(ren, pos, message):
     # investigation shows that the DisplayExtent of the imageactor is
     # indeed larger than the wholeextent of the imagedata, although
     # these two are set to be equal in the UpdateImageActor.
-    ta.GetImageActor().SetDisplayExtent(ta.GetImageData().GetWholeExtent())
+    #ta.GetImageActor().SetDisplayExtent(ta.GetImageData().GetWholeExtent())
 
 
     ren.AddActor(ta)
@@ -76,18 +75,28 @@ def main():
     rwi.Initialize()
 
 
-    ta1 = make_glyph(ren, (0,0), 'Hello there\nHoo you too')
+    ta1 = make_glyph(ren, (0,0), 'Hello thereTTT\nHoo you too')
 
-    ta2 = make_glyph(ren, (0,100), 'What ghte hell')
+    ta2 = make_glyph(ren, (0,100), 'What ghte')
+
+    ta3 = make_glyph(ren, (-100, -100), 'To the left and below')
 
     ren.ResetCamera()
-    try:
-        rw.Render()
-    except RuntimeError:
-        import pdb
-        pdb.set_trace()
+    rw.Render()
 
-    print ta2.GetBounds()
+    b = ta1.GetBounds()
+    b = [0,0,0,0]
+    ta1.GetBoundingBox(b)
+    print b
+
+    ss = vtk.vtkSphereSource()
+    ss.SetRadius(32)
+    sm = vtk.vtkPolyDataMapper()
+    sm.SetInput(ss.GetOutput())
+    sa = vtk.vtkActor()
+    sa.SetMapper(sm)
+    sa.SetPosition((b[1] - b[0],b[3] - b[2],0))
+    ren.AddActor(sa)
 
     rwi.Start()
 
