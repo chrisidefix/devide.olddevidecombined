@@ -5,9 +5,9 @@
 # vtk before vtkgdcm, then it screws up.  Apply this patch to fix:
 #http://public.kitware.com/cgi-bin/viewcvs.cgi/Wrapping/Python/vtk/__init__.py?r1=1.13&r2=1.14&pathrev=MAIN
 
+import vtk
 import vtkgdcm
 import gdcm
-import vtk
 
 r = vtkgdcm.vtkGDCMImageReader()
 r.SetFileName('tosh_data')
