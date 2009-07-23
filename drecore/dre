@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# this script will invoke the DRE Python driver script (dre.py) with
+# the locally-built Python interpreter.  Each platform supported by
+# the DRE (at the moment Windows and Linux) has a small command
+# interpreter / shell script to bootstrap the main DRE driver, which
+# does all the work.
+
+# this script lives in the top-level DRE directory, i.e. the 'inst'
+# directory of the johannes build tree.
+
+MYDIR=`dirname $0`
+export PATH=$MYDIR/python/bin
+
+python $MYDIR/dre.py $*
+
+
