@@ -24,6 +24,7 @@ def main():
 
     if len(sys.argv) < 2:
         disp_usage()
+        return
 
     dream_name = sys.argv[1]
 
