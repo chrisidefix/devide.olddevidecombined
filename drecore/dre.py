@@ -13,6 +13,35 @@ class DRE:
     def disp_usage(self):
         print "Perbeer nog een keer."
 
+    def helper_run_python(self, args):
+        """Helper function used by built-in dreams to execute the DRE-enabled python on stuff.
+
+        @param args: Will be passed to python as command line argumenst.
+        """
+
+        p = subprocess.Popen([self.python_bin] + args, env=self.env)
+        # wait for the process to return
+        p.communicate()
+
+    def helper_args_preprocess(self):
+        if len(sys.argv) > 2:
+            args = sys.argv[2:]
+        else:
+            args = []
+
+        return args
+
+
+    def run_devide(self):
+        """Built-in dream to run the DeVIDE that is packaged with the DRE.
+        """
+        devide_fn = os.path.join(self.dre_top, 'devide', 'devide.py')
+
+        # if any MORE arguments were passed after "devide", pass that on
+        args = self.helper_args_preprocess()
+
+        self.helper_run_python([devide_fn] + args)
+
     def run_drepython(self):
         """Run the DRE Python with the environment correctly setup so that
         all DRE libraries can be imported.
@@ -21,16 +50,17 @@ class DRE:
 
         # if any MORE arguments were passed after "python", pass that on
         # to the python interpreter
-        if len(sys.argv) > 2:
-            args = sys.argv[2:]
-        else:
-            args = []
+        args = self.helper_args_preprocess()
 
-        p = subprocess.Popen([self.python_bin] + args, env=self.env)
-        p.communicate()
+        self.helper_run_python(args)
+
+    def run_pyfile(self, pyfilename):
+        args = self.helper_args_preprocess()
+        self.helper_run_python([pyfilename] + args)
 
     def main(self):
         # first check for builtin
+        # then check for dream in dre_top/dreams/
         # then check for file / dir
 
         # simple argument checking no getopt: only sys.argv[1] is checked,
@@ -40,7 +70,9 @@ class DRE:
             return
 
         # now setup some variables we'll need ############################
-        self.builtin_dreams = {'python' : self.run_drepython}
+        self.builtin_dreams = {
+                'python' : self.run_drepython,
+                'devide' : self.run_devide}
         # first determine the directory containing dre.py
         self.dre_top = os.path.abspath(os.path.dirname(sys.argv[0]))
 
@@ -70,6 +102,7 @@ class DRE:
                 self.env[env_var] = elems
 
 
+        # start command-line processing ###############################
         dream_name = sys.argv[1]
 
         # check for builtin
@@ -77,7 +110,8 @@ class DRE:
         if m is not None:
             m()
 
-
+        elif os.path.exists(dream_name):
+            self.run_pyfile(dream_name)
 
 
 if __name__ == "__main__":
