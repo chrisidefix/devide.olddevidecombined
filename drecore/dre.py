@@ -10,10 +10,33 @@ import os
 import subprocess
 import sys
 
+help_msg = """
+Welcome to the DRE (DeVIDE Runtime Environment) runner.
+
+With this programme, you can invoke DREAMs, or DRE Application
+Modules, for example the DeVIDE application, a Python interpreter
+enhanced with VTK, ITK and wxPython or your own applications.
+
+Invoke as follows:
+    dre dream_name [param1 param2 param3]
+
+Where dream_name can be: 
+1. One of the built-in dreams:
+    devide   - Graphical medical visualisation application application builder.
+    help     - Show this message.
+    python   - Python interpreter with VTK, ITK, wxPython available.
+    versions - Output versions of included libraries.
+
+2. The full path to an arbitrary Python script.
+
+3. A Python package or script located in dre-toplevel/dreams/
+
+"""
+
 class DRE:
 
     def disp_usage(self):
-        print "Perbeer nog een keer."
+        print help_msg
 
     def helper_run_python(self, args):
         """Helper function used by built-in dreams to execute the DRE-enabled python on stuff.
@@ -56,6 +79,12 @@ class DRE:
 
         self.helper_run_python(args)
 
+    def run_versions(self):
+        print "TBD."
+
+    def run_help(self):
+        print help_msg
+
     def run_pyfile(self, pyfilename):
         args = self.helper_args_preprocess()
         self.helper_run_python([pyfilename] + args)
@@ -74,7 +103,9 @@ class DRE:
         # now setup some variables we'll need ############################
         self.builtin_dreams = {
                 'python' : self.run_drepython,
-                'devide' : self.run_devide}
+                'devide' : self.run_devide,
+                'help'   : self.run_help,
+                'versions' : self.run_versions}
         # first determine the directory containing dre.py
         self.dre_top = os.path.abspath(os.path.dirname(sys.argv[0]))
 
@@ -114,6 +145,9 @@ class DRE:
 
         elif os.path.exists(dream_name):
             self.run_pyfile(dream_name)
+
+        else:
+            print "Could not find specified DREAM."
 
 
 if __name__ == "__main__":
