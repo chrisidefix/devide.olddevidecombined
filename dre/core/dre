@@ -10,8 +10,7 @@
 # directory of the johannes build tree.
 
 MYDIR=`dirname $0`
-export PATH=$MYDIR/python/bin
 
-python $MYDIR/dre.py $*
+$MYDIR/python/bin/python $MYDIR/dre.py $*
 
 
