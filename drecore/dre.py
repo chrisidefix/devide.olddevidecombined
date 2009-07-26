@@ -1,3 +1,7 @@
+# Copyright (c) Charl P. Botha, TU Delft.
+# All rights reserved.
+# See COPYRIGHT for details.
+
 # main DRE driver script
 
 import ConfigParser
@@ -5,8 +9,6 @@ import copy
 import os
 import subprocess
 import sys
-
-
 
 class DRE:
 
