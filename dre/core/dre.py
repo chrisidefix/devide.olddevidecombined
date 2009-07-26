@@ -30,6 +30,7 @@ Where dream_name can be:
 2. The full path to an arbitrary Python script.
 
 3. A Python package or script located in dre-toplevel/dreams/
+    pythonwx - Graphical Python shell with tooltips, history, etc.
 
 """
 
@@ -108,6 +109,7 @@ class DRE:
                 'versions' : self.run_versions}
         # first determine the directory containing dre.py
         self.dre_top = os.path.abspath(os.path.dirname(sys.argv[0]))
+        self.dreams_dir = os.path.join(self.dre_top, 'dreams')
 
         if os.name == 'nt':
             self.python_bin = os.path.join(self.dre_top, 'python', 'python.exe')
@@ -132,11 +134,21 @@ class DRE:
                 # append them altogether with either ; or : in between, 
                 # depending on OS
                 elems = os.pathsep.join([i[1] for i in cp.items(sec)])
+
+                # if this env variable already exists, prepend to it:
+                v = self.env.get(env_var)
+                if v is not None:
+                    elems = os.pathsep.join([elems, v])
+
                 self.env[env_var] = elems
 
 
         # start command-line processing ###############################
         dream_name = sys.argv[1]
+
+        candidate_dreams_path = os.path.join(
+                self.dreams_dir, '%s.py' % (dream_name,))
+
 
         # check for builtin
         m = self.builtin_dreams.get(dream_name)
@@ -145,6 +157,10 @@ class DRE:
 
         elif os.path.exists(dream_name):
             self.run_pyfile(dream_name)
+
+        elif os.path.exists(candidate_dreams_path):
+            self.run_pyfile(candidate_dreams_path)
+
 
         else:
             print "Could not find specified DREAM."
