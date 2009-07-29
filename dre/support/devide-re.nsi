@@ -60,15 +60,15 @@ SectionEnd
 Section "Start Menu Shortcuts"
   CreateDirectory "$SMPROGRAMS\DeVIDE-RE"
 
-  CreateShortCut "$SMPROGRAMS\DeVIDE\DeVIDE.lnk" \
+  CreateShortCut "$SMPROGRAMS\DeVIDE-RE\DeVIDE.lnk" \
   "$INSTDIR\dre.cmd" "devide" \
   "$INSTDIR\devide\resources\graphics\devidelogo64x64.ico" 0
 
-  CreateShortCut "$SMPROGRAMS\DeVIDE\DeVIDE no-itk.lnk" \
+  CreateShortCut "$SMPROGRAMS\DeVIDE-RE\DeVIDE no-itk.lnk" \
   "$INSTDIR\dre.cmd" "devide --no-kits itk_kit" \
   "$INSTDIR\devide\resources\graphics\devidelogo64x64.ico" 0
 
-  CreateShortCut "$SMPROGRAMS\DeVIDE\Uninstall.lnk" \
+  CreateShortCut "$SMPROGRAMS\DeVIDE-RE\Uninstall.lnk" \
   "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0  
 
 SectionEnd
@@ -95,21 +95,21 @@ UninstallText "This will uninstall DeVIDE. Hit next to continue."
 Section "Uninstall"
   
   ; remove registry keys
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\DeVIDE"
-  DeleteRegKey HKLM SOFTWARE\DeVIDE
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\DeVIDE-RE"
+  DeleteRegKey HKLM SOFTWARE\DeVIDE-RE
 
   ; remove files and uninstaller
   Delete $INSTDIR\*.*
 
   ; remove shortcuts, if any
-  Delete "$SMPROGRAMS\DeVIDE\*.*"
+  Delete "$SMPROGRAMS\DeVIDE-RE\*.*"
 
   ; remove desktop shortcut
   Delete "$DESKTOP\DeVIDE.lnk"
   Delete "$DESKTOP\DeVIDE no-itk.lnk"
 
   ; remove directories used
-  RMDir "$SMPROGRAMS\DeVIDE"
+  RMDir "$SMPROGRAMS\DeVIDE-RE"
 
   ; actually this will do a recursive delete on everything
   RMDir /R "$INSTDIR"
