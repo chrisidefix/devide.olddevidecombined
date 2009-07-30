@@ -11,6 +11,7 @@
 
 MYDIR=`dirname $0`
 
-$MYDIR/python/bin/python $MYDIR/dre.py $*
+LD_LIBRARY_PATH="$MYDIR/python/lib" \
+"$MYDIR/python/bin/python" "$MYDIR/dre.py" $*
 
 
