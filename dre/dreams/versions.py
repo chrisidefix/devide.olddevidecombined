@@ -1,15 +1,60 @@
+# FIXME: check that everything is located in the DRE_TOP directory.
+
 import os
 import platform
+import re
 import sys
 
 output = """
 -= DeVIDE Runtime Environment (DRE) v%(devide_ver)s =-
 
 Platform: %(machine_id)s
-Software:
+
+Basic software:
+    cmake %(cmake_ver)s
+
+Python software:
     Python %(python_ver)s
+    numpy %(numpy_ver)s
+    matplotlib %(mpl_ver)s
     wxPython %(wx_ver)s
+    VTK %(vtk_ver)s
+    ITK %(itk_ver)s
+    gdcm %(gdcm_ver)s
+
 """
+
+def helper_get_status_output(command):
+    """Run command, return output of command and exit code in status.
+    In general, status is None for success and 1 for command not
+    found.
+    """
+
+    ph = os.popen(command)
+    output = ph.read()
+    status = ph.close()
+    return (status, output)
+
+
+def get_cmake_version():
+    dre_top = os.environ.get('DRE_TOP')
+    cmake_binpath = os.path.join(
+            dre_top, 'cmake', 'bin', 'cmake')
+
+    status, output = helper_get_status_output(
+            cmake_binpath + ' -version')
+
+    if status is None:
+        mo = re.search('^cmake version (.*)$', output)
+        if mo:
+            return mo.groups()[0]
+        else:
+            return '[error extracting version]'
+        
+    else:
+        return '[not found]'
+
+
 
 def get_devide_version():
     """Return DeVIDE version string.
@@ -18,6 +63,13 @@ def get_devide_version():
     import devide
     return devide.DEVIDE_VERSION
 
+def get_gdcm_version():
+    import gdcm
+    return gdcm.Version.GetVersion()  
+
+def get_itk_version():
+    import itk
+    return itk.Version.GetITKVersion()
 
 def get_machine_id():
     """Return string of the form:
@@ -28,9 +80,29 @@ def get_machine_id():
     a = platform.architecture()
     return '%s %s on %s (%s)' % (u[0], u[2], u[4], a[0]) 
 
+def get_mpl_ver():
+    try:
+        import matplotlib
+    except ImportError:
+        return "[not installed]"
+    else:
+        return matplotlib.__version__
+
+def get_numpy_ver():
+    try:
+        import numpy
+    except ImportError:
+        return "[not installed]"
+    else:
+        return numpy.version.version
+
 def get_python_version():
     ver, comp = sys.version.split('\n')
     return '%s compiler %s' % (ver.strip(), comp)
+
+def get_vtk_version():
+    import vtk
+    return vtk.vtkVersion.GetVTKVersion()
 
 def get_wx_version():
     import wx
@@ -41,6 +113,12 @@ def main():
           'machine_id' : get_machine_id(),
           'python_ver' : get_python_version(),
           'wx_ver' : get_wx_version(),
+          'numpy_ver' : get_numpy_ver(),
+          'mpl_ver' : get_mpl_ver(),
+          'vtk_ver' : get_vtk_version(),
+          'itk_ver' : get_itk_version(),
+          'gdcm_ver' : get_gdcm_version(),
+          'cmake_ver' : get_cmake_version()
         }
 
     print output % vd
