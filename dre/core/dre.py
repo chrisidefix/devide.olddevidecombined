@@ -138,6 +138,10 @@ class DRE:
 
                 self.env[env_var] = elems
 
+        # we also insert the DRE_TOP variable in the environment, this
+        # points to the top-level DRE dir containing the dre.py file.
+        self.env['DRE_TOP'] = self.dre_top 
+
 
         # start command-line processing ###############################
         dream_name = sys.argv[1]
