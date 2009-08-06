@@ -25,11 +25,11 @@ Where dream_name can be:
     devide   - Graphical medical visualisation application application builder.
     help     - Show this message.
     python   - Python interpreter with VTK, ITK, wxPython available.
-    versions - Output versions of included libraries.
 
 2. The full path to an arbitrary Python script.
 
 3. A Python package or script located in dre-toplevel/dreams/
+    versions - Output versions of included libraries.
     pythonwx - Graphical Python shell with tooltips, history, etc.
 
 """
@@ -80,9 +80,6 @@ class DRE:
 
         self.helper_run_python(args)
 
-    def run_versions(self):
-        print "TBD."
-
     def run_help(self):
         print help_msg
 
@@ -105,8 +102,7 @@ class DRE:
         self.builtin_dreams = {
                 'python' : self.run_drepython,
                 'devide' : self.run_devide,
-                'help'   : self.run_help,
-                'versions' : self.run_versions}
+                'help'   : self.run_help}
         # first determine the directory containing dre.py
         self.dre_top = os.path.abspath(os.path.dirname(sys.argv[0]))
         self.dreams_dir = os.path.join(self.dre_top, 'dreams')
