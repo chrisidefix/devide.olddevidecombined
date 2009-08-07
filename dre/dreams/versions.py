@@ -5,12 +5,13 @@ import platform
 import re
 import sys
 
-output = """
+output1 = """
 -= DeVIDE Runtime Environment (DRE) v%(devide_ver)s =-
 
 Platform: %(machine_id)s
+"""
 
-Basic software:
+output2 = """Basic software:
     cmake %(cmake_ver)s
 
 Python software:
@@ -21,7 +22,6 @@ Python software:
     VTK %(vtk_ver)s
     ITK %(itk_ver)s
     gdcm %(gdcm_ver)s
-
 """
 
 def helper_get_status_output(command):
@@ -98,7 +98,7 @@ def get_numpy_ver():
 
 def get_python_version():
     ver, comp = sys.version.split('\n')
-    return '%s compiler %s' % (ver.strip(), comp)
+    return '%s' % (ver.strip(),)
 
 def get_vtk_version():
     import vtk
@@ -109,8 +109,14 @@ def get_wx_version():
     return wx.VERSION_STRING
 
 def main():
-    vd = {'devide_ver' : get_devide_version(),
-          'machine_id' : get_machine_id(),
+    # print output in two sections, because the second section can
+    # take its time.  This way, the user knows that we're here.
+    vd1 = {'devide_ver' : get_devide_version(),
+          'machine_id' : get_machine_id()
+          }
+    print output1 % vd1
+
+    vd2 = {
           'python_ver' : get_python_version(),
           'wx_ver' : get_wx_version(),
           'numpy_ver' : get_numpy_ver(),
@@ -120,8 +126,7 @@ def main():
           'gdcm_ver' : get_gdcm_version(),
           'cmake_ver' : get_cmake_version()
         }
-
-    print output % vd
+    print output2 % vd2
 
 if __name__ == '__main__':
     main()
