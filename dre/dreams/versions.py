@@ -97,8 +97,7 @@ def get_numpy_ver():
         return numpy.version.version
 
 def get_python_version():
-    ver, comp = sys.version.split('\n')
-    return '%s' % (ver.strip(),)
+    return '%s.%s.%s %s-%s' % sys.version_info
 
 def get_vtk_version():
     import vtk
