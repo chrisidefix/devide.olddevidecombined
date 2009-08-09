@@ -1,5 +1,9 @@
 ; devide.nsi - based on example2.nsi
 ; $Id: devide.nsi 2759 2008-02-23 20:56:40Z cpbotha $
+;
+
+; this also includes LogicLib.nsh
+!include x64.nsh
 
 ;--------------------------------
 
@@ -42,6 +46,21 @@ Section "DeVIDE-RE (required)"
   
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
+
+  ; also package the vcredist for vs 2008 sp1
+  ; pick the right one depending on our platform.
+  ; on win64, also disable redirection so that we get
+  ; installed to Program Files and not Program Files (x86)
+  ${If} ${RunningX64}
+    ${DisableX64FSRedirection}
+    File "archive\vcredist_x64.exe"
+    ExecWait '"$INSTDIR\vcredist_x64.exe" /qb'
+    Delete "$INSTDIR\vcredist_x64.exe"
+  ${Else}
+    File "archive\vcredist_x86.exe"
+    ExecWait '"$INSTDIR\vcredist_x86.exe" /qb'
+    Delete "$INSTDIR\vcredist_x86.exe"
+  ${EndIf}
   
   ; take all these files (recursively yay)
   File /r "devide-re\*.*"
