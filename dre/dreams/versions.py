@@ -42,7 +42,7 @@ def get_cmake_version():
             dre_top, 'cmake', 'bin', 'cmake')
 
     status, output = helper_get_status_output(
-            cmake_binpath + ' -version')
+            cmake_binpath + ' --version')
 
     if status is None:
         mo = re.search('^cmake version (.*)$', output)
