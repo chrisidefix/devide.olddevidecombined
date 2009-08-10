@@ -28,6 +28,10 @@ def helper_get_status_output(command):
     """Run command, return output of command and exit code in status.
     In general, status is None for success and 1 for command not
     found.
+
+    IMPORTANT: when on Windows, make sure to double-quote your command
+    paths, else the spaces (for example in Program Files), cause huge
+    headaches.
     """
 
     ph = os.popen(command)
@@ -41,8 +45,10 @@ def get_cmake_version():
     cmake_binpath = os.path.join(
             dre_top, 'cmake', 'bin', 'cmake')
 
+    # HUGELY important: On Windows, the path might have spaces in it,
+    # so we need to quote.
     status, output = helper_get_status_output(
-            cmake_binpath + ' --version')
+            '"%s" --version' % (cmake_binpath,))
 
     if status is None:
         mo = re.search('^cmake version (.*)$', output)
