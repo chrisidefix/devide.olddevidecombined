@@ -4,7 +4,12 @@
 
 ; this also includes LogicLib.nsh
 !include x64.nsh
-
+; on x64, we want the real paths, not the redirected ones for win32
+; applications.
+${If} ${RunningX64}
+  ${DisableX64FSRedirection}
+${EndIf}
+ 
 ;--------------------------------
 
 ; The name of the installer
@@ -45,10 +50,7 @@ Section "DeVIDE-RE (required)"
 
   SectionIn RO
 
-  ${If} ${RunningX64}
-    ${DisableX64FSRedirection}
-  ${EndIf}
- 
+
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
   
