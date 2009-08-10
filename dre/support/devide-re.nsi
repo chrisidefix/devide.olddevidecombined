@@ -2,14 +2,6 @@
 ; $Id: devide.nsi 2759 2008-02-23 20:56:40Z cpbotha $
 ;
 
-; this also includes LogicLib.nsh
-!include x64.nsh
-; on x64, we want the real paths, not the redirected ones for win32
-; applications.
-${If} ${RunningX64}
-  ${DisableX64FSRedirection}
-${EndIf}
- 
 ;--------------------------------
 
 ; The name of the installer
@@ -30,6 +22,14 @@ ComponentText "Select optional components."
 
 ; The text to prompt the user to enter a directory
 DirText "Choose the directory where you'd like to install DeVIDE:"
+
+Function .onInit
+  ; this also includes LogicLib.nsh
+  !include x64.nsh
+  ; on x64, we want the real paths, not the redirected ones for win32
+  ; applications.
+  ${DisableX64FSRedirection}
+FunctionEnd
 
 ;--------------------------------
 
