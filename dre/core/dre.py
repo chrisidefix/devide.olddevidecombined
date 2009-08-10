@@ -10,12 +10,10 @@ import os
 import subprocess
 import sys
 
-help_msg = """
-Welcome to the DRE (DeVIDE Runtime Environment) runner.
+help_msg = """Welcome to the DRE (DeVIDE Runtime Environment) runner.
 
 With this programme, you can invoke DREAMs, or DRE Application
-Modules, for example the DeVIDE application, a Python interpreter
-enhanced with VTK, ITK and wxPython or your own applications.
+Modules, for example DeVIDE or IPython with VTK, ITK, etc.
 
 Invoke as follows:
     dre dream_name [param1 param2 param3]
@@ -29,8 +27,10 @@ Where dream_name can be:
 2. The full path to an arbitrary Python script.
 
 3. A Python package or script located in dre-toplevel/dreams/
-    versions - Output versions of included libraries.
-    pythonwx - Graphical Python shell with tooltips, history, etc.
+    versions  - Output versions of included libraries.
+    ipython   - Interactive Python shell (no graphics)
+    pythonwx  - Simple graphical Python shell with tooltips, history, etc.
+    ipythonwx - Less simple graphical version of IPython.
 
 """
 
