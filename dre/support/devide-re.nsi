@@ -11,6 +11,7 @@ Name "DeVIDE-RE"
 OutFile "devide-re-setup.exe"
 
 ; The default installation directory
+; build_install.py will rewrite this to $PROGRAMFILES64
 InstallDir $PROGRAMFILES\DeVIDE-RE
 
 ; Registry key to check for directory (so if you install again, it will 
@@ -22,14 +23,6 @@ ComponentText "Select optional components."
 
 ; The text to prompt the user to enter a directory
 DirText "Choose the directory where you'd like to install DeVIDE:"
-
-Function .onInit
-  ; this also includes LogicLib.nsh
-  !include x64.nsh
-  ; on x64, we want the real paths, not the redirected ones for win32
-  ; applications.
-  ${DisableX64FSRedirection}
-FunctionEnd
 
 ;--------------------------------
 
@@ -53,7 +46,8 @@ Section "DeVIDE-RE (required)"
 
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
-  
+
+  ; will be rewritten by build_installer.py to vcredist_x64
   File "archive\vcredist_x86.exe"
   ExecWait '"$INSTDIR\vcredist_x86.exe" /qb'
   Delete "$INSTDIR\vcredist_x86.exe"
