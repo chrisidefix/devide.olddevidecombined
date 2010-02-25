@@ -17,6 +17,11 @@ def observer_charevent(obj, evt_name, view):
         view.GetRenderWindow().Render()
         print cur_bs
 
+def observer_selchanged(obj, evt_name):
+    print "number of reps", obj.GetNumberOfRepresentations()
+    r = obj.GetRepresentation(0)
+    #print r
+
 
 def main():  
     tree_fn = "vtklibrary.xml";
@@ -65,7 +70,9 @@ def main():
     #view.SetGraphEdgeColorArrayName("graph edge")
     #view.SetColorGraphEdgesByArray(True)
 
-    lstrat = 'tree'
+    view.AddObserver('SelectionChangedEvent', observer_selchanged)
+
+    lstrat = 'cosmic tree'
     if lstrat == 'cosmic tree':
         cls = vtk.vtkCosmicTreeLayoutStrategy()
         cls.SetNodeSizeArrayName("VertexDegree")
