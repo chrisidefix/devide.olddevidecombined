@@ -11,7 +11,9 @@
 
 MYDIR=`dirname $0`
 
+# very important that we use "$@". With anything else (unquoted, or $*,
+# quoted and unquoted) filenames with spaces get mangled.
 LD_LIBRARY_PATH="$MYDIR/python/lib" \
-"$MYDIR/python/bin/python" "$MYDIR/dre.py" $*
+"$MYDIR/python/bin/python" "$MYDIR/dre.py" "$@"
 
 
