@@ -103,7 +103,7 @@ def get_numpy_ver():
         return numpy.version.version
 
 def get_python_version():
-    return '%s.%s.%s %s-%s' % sys.version_info
+    return '%s.%s.%s %s-%s' % tuple(sys.version_info)
 
 def get_vtk_version():
     import vtk
