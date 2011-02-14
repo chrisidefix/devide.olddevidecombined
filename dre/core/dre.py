@@ -31,6 +31,7 @@ Where dream_name can be:
     ipython   - Interactive Python shell (no graphics)
     pythonwx  - Simple graphical Python shell with tooltips, history, etc.
     ipythonwx - Less simple graphical version of IPython.
+    shell     - Start a system shell with DRE-determined environment.
 
 """
 
