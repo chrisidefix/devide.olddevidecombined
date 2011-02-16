@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# shortcut script for "dre python" that can be used as the PyDev python
+# interpreter when setting up your project in eclipse.
+
+# this script lives in the top-level DRE directory, i.e. the 'inst'
+# directory of the johannes build tree, together with the dre command.
+
+MYDIR=`dirname $0`
+
+# very important that we use "$@". With anything else (unquoted, or $*,
+# quoted and unquoted) filenames with spaces get mangled.
+"$MYDIR/dre" python "$@"
+
+
