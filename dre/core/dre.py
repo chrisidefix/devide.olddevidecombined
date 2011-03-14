@@ -121,8 +121,20 @@ class DRE:
         cp = ConfigParser.ConfigParser({'dre_top' : self.dre_top})
         cf = open(os.path.join(self.dre_top, 'dre.cfg'),'r')
         cp.readfp(cf)
-        # get the specified environment from dre.cfg and merge it with the existing environment.
+        
+        # get the specified environment from dre.cfg and merge it with the 
+        # existing environment.
+        #####################################################################
+        
+        # first make a deepcopy of the existing environment
         self.env = copy.deepcopy(os.environ)
+        # delete PYTHONPATH, else it could lead to system libraries taking 
+        # preference over our own see:
+        # http://code.google.com/p/devide/issues/detail?id=188
+        if self.env.has_key('PYTHONPATH'):
+            del self.env['PYTHONPATH']
+        
+        # now merge all sections from dre.cfg with our copy of the environment
         for sec in cp.sections():
             if sec.startswith('env:'):
                 env_var = sec[4:].upper()
