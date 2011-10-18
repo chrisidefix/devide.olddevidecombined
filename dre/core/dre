@@ -11,9 +11,11 @@
 
 MYDIR=`dirname $0`
 
-# very important that we use "$@". With anything else (unquoted, or $*,
-# quoted and unquoted) filenames with spaces get mangled.
-LD_LIBRARY_PATH="$MYDIR/python/lib" \
+# * very important that we use "$@". With anything else (unquoted, or $*,
+#   quoted and unquoted) filenames with spaces get mangled.
+# * we also need to add UBUNTU_MENUPROXY due to a bug on ubuntu where the wxpython
+#   menubar is not shown.
+UBUNTU_MENUPROXY=0 LD_LIBRARY_PATH="$MYDIR/python/lib" \
 "$MYDIR/python/bin/python" "$MYDIR/dre.py" "$@"
 
 
