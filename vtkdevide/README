@@ -1,0 +1,107 @@
+Current ITK/VTK notes
+---------------------
+
+*****
+As of 20031201: Rude bug with CVS ITK, VTK and DICOMParser.  Both ITK and VTK
+use the same DICOMParser and it seems that the wrong code is being executed
+at dynamic linking due to symbols being identical.  See my posting:
+http://www.itk.org/pipermail/insight-users/2003-December/005716.html
+
+Temporary fix: comment out DICOM thingies in RegisterBuiltInFactories() in
+Code/IO/itkImageIOFactory.cxx
+
+Getting this to build on RHEL3 64bit
+------------------------------------
+
+* Make sure your CFLAGS and CXXFLAGS environment variables contain "-m64"
+* Change all occurrences of lib in the VTK CMake config to lib64
+* Due to an internal compiler error, vtkImageLogic and
+  vtkImageEuclideanDistance can't be built.  Build these two by hand, but use
+  -O0 instead of -O2.
+* When you build DCMTK, add -fPIC to CFLAGS and CXXFLAGS in
+  config/Makefile.def
+
+Getting this to build in Visual C++ 6.0 (and VS.NET2003)
+--------------------------------------------------------
+
+* Important note: with the VS.NET2003 config, it seems that you have to add
+  RelWithDebInfo to the cmake config (via the GUI) with every new config,
+  else attempting to build with this target obviously fails.
+
+General
+-------
+
+- If you're going to build a Debug release, you'll notice a missing
+  python22_d.lib.  To workaround this if you don't really need debugging in
+  the python library, edit pyconfig.h: change the ref to python22_d.lib to
+  just python22.lib and comment out #define Py_DEBUG
+
+Your VTK build
+--------------
+
+- You have to activate VTK_USE_HYBRID in your VTK build, else vtkdevide can 
+  not build.
+
+- You're going to build with Python wrapping, so you need Tcl installed.  
+  Makes sense, doesn't it?  Because Python 2.2.3 itself makes use of tcl/tk
+  8.3, I installed ActiveTcl 8.3.5.0-2 (from activestate.com); most of the tk 
+  thingies required by cmake are in f:\tcl\include and lib.  TK_INTERNAL_PATH
+  is of course in the VTK/Rendering/tkInternals/tk<version>.
+
+- Python 2.3.3 uses Tcl 8.4, so... (ActiveTcl8.4.6.1-win32-ix86-99631.exe)
+
+- VERY important: make sure that VTK_USE_ANSI_STDLIB is set to ON in your
+  VTK cmake configuration!
+
+
+The vtkdevide config
+--------------------
+
+- Also modify the dcmtk project in MSVC++ to use /MD and not /MT.  You only
+  have to build ofstd and dcmdata (when you import the DCMTK 3.5.3 workspace
+  into MSVS.NET2003, this is already done)
+  * with DCMTK 3.5.4, you have to generate the CMake config, and then STILL
+    change the /MTd (RelWithDebInfo) to /MDd in the properties|C++|Code 
+    generation of dcmdata and ofstd.
+	
+- With MS VS 2008 (8.0) and DCMTK 3.5.4, edit the DCMTK CMakeLists, changing 
+  all applicable occurrences of /MT into /MD and /MTd into /MDd.  Also see:
+  http://forum.dcmtk.org/viewtopic.php?t=35
+	
+- Since VTK has started mangling zlib names in their zlib library (better this
+  way), you must build dcmdata with the VTK zlib library: modify the "project|
+  settings| c/c++" in VC and add VTKSourceDir/Utilities/vtkzlib and
+  VTKBuildDir/Utilities to the includes, only for dcmdata.  Make sure
+  there's no other zlib include/library directories lying around on
+  the same level as the dcmtk root.  This way, DCMTK will make use of
+  vtk's zlib version.
+  
+- Under Linux, it's better to use the system ZLIB.  It's very difficult to get
+  DCMTK to use the VTK zlib when there's a system ZLIB around, and this will
+  screw around with vtkdevide's dynamic linking.
+
+- In MSVS.NET2003, select dcmdata in the solution explorer, then
+  select properties, c/c++, general, additional includes.
+
+- Now we have to make a pseudo install: 
+  * create a new directory, e.g. dcmtkInstall with subdirs lib and include.
+  * copy dcmdata.lib and ofstd.lib into lib
+  * copy the config, dcmdata and the ofstd include directories into 
+    include/dcmtk
+
+UNIMPORTANT REMINDER :)
+--------------------
+
+PATH: C:\build\VTK-VS71\bin\relwithdebinfo;
+      C:\build\Insight-VS71\bin\relwithdebinfo;
+      C:\work\code\vtkdevide\bin\relwithdebinfo;
+      C:\build\InsightApplications-VS71\bin\relwithdebinfo
+
+PYTHONPATH: C:\build\VTK-VS71\bin\relwithdebinfo;
+            C:\build\VTK-VS71\Wrapping\Python;
+            C:\build\Insight-VS71\bin\relwithdebinfo;
+            C:\build\Insight-VS71\Wrapping\CSwig\Python\RelWithDebInfo;
+            C:\work\code\vtkdevide\bin\relwithdebinfo;
+            C:\work\code\vtkdevide\Wrapping\Python;
+            C:\build\InsightApplications-VS71\bin\relwithdebinfo;
+            C:\build\InsightApplications-VS71\ConnectVTKITK
